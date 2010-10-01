@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+  <!-- HandlerMapping -->
+  <bean id = "handlerMapping"
+        class = "org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+      <props>
+        <prop key="/member/join.oz">userEntryFormController</prop>
+        <prop key="/index.oz">indexController</prop>
+        <prop key="/admin/index.oz">adminIndexController</prop>
+        <prop key="/admin/item/index.oz">adminItemController</prop>
+        <prop key="/admin/member/index.oz">adminMemberController</prop>
+        <prop key="/admin/board/index.oz">adminBoardController</prop>
+        <!-- category -->
+        <prop key="/admin/category/index.oz">adminCategoryController</prop>
+        <prop key="/admin/category/addCategory.oz">adminAddCategoryController</prop>
+        <prop key="/admin/category/delCategory.oz">adminDelCategoryController</prop>
+        <prop key="/admin/category/editCategory.oz">adminEditCategoryController</prop>
+        
+        <!-- event -->
+        <prop key="/admin/event/index.oz">adminCategoryController</prop>
+        <prop key="/admin/event/addEvent.oz">adminAddEventController</prop>
+        <prop key="/admin/event/delEvent.oz">adminDelEventController</prop>
+        <prop key="/admin/event/editEvent.oz">adminEditEventController</prop>
+      </props>
+    </property>
+  </bean>
+  
+  <!-- Controller -->
+  <bean id="indexController" class="store.web.controller.IndexController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  
+  <bean id="userEntryFormController" class="store.web.controller.UserEntryFormController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>user</value></property>
+  	<property name="commandClass"><value>store.logic.User</value></property>
+  	<property name="validator"><ref bean="userEntryValidator"/></property>
+  	<property name="formView"><value>userEntry</value></property>
+  	<property name="successView"><value>userEntrySuccess</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  
+  <bean id="adminIndexController" class="store.web.controller.admin.AdminIndexController">
+  </bean>
+  
+  <bean id="adminItemController" class="store.web.controller.admin.item.AdminItemController">
+  </bean>
+
+  <bean id="adminMemberController" class="store.web.controller.admin.member.AdminMemberController">
+  </bean>
+
+  <bean id="adminBoardController" class="store.web.controller.admin.board.AdminBoardController">
+  </bean>
+
+  <!-- Category controller start -->
+  <bean id="adminCategoryController" class="store.web.controller.admin.category.AdminCategoryController">
+    	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminAddCategoryController" class="store.web.controller.admin.category.AdminAddCategoryController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>category</value></property>
+  	<property name="commandClass"><value>store.logic.Category</value></property>
+  	<property name="validator"><ref bean="categoryEntryValidator"/></property>
+  	<property name="formView"><value>admin.categoryEntry</value></property>
+  	<property name="successView"><value>admin.categoryEntrySuccess</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminDelCategoryController" class="store.web.controller.admin.category.AdminDelCategoryController">
+    	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminEditCategoryController" class="store.web.controller.admin.category.AdminEditCategoryController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>category</value></property>
+  	<property name="commandClass"><value>store.logic.Category</value></property>
+  	<property name="validator"><ref bean="categoryEntryValidator"/></property>
+  	<property name="formView"><value>admin.categoryEdit</value></property>
+  	<property name="successView"><value>admin.categoryEditSuccess</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  <!-- Category controller end -->
+
+  <!-- Event controller start -->
+  <bean id="adminEventController" class="store.web.controller.admin.event.AdminEventController">
+    	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminAddEventController" class="store.web.controller.admin.event.AdminAddEventController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>event</value></property>
+  	<property name="commandClass"><value>store.logic.Event</value></property>
+  	<property name="formView"><value>admin.eventEntry</value></property>
+  	<property name="successView"><value>admin.eventEntrySuccess</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminDelEventController" class="store.web.controller.admin.event.AdminDelEventController">
+    	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminEditEventController" class="store.web.controller.admin.event.AdminEditCategoryController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>event</value></property>
+  	<property name="commandClass"><value>store.logic.Event</value></property>
+  	<property name="formView"><value>admin.eventEdit</value></property>
+  	<property name="successView"><value>admin.eventEditSuccess</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  <!-- Event controller end -->
+  
+  <!-- ViewResolver -->
+  <bean id="resourceBundleViewResolver"
+        class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+    <property name="basename">
+      <value>view</value>
+    </property>     
+  </bean>
+ </beans>
