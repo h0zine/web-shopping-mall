@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+  <!-- Data Source -->
+  <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName">
+      <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property name="url">
+      <value>jdbc:mysql://localhost/store?useUnicode=true&amp;characterEncoding=euckr</value>
+    </property>
+    <property name="username">
+      <value>root</value>
+    </property>
+    <property name="password">
+      <value></value>
+    </property>
+  </bean>
+  
+  <!-- ItemCatalog -->
+  <bean id="itemCatalog" class="store.logic.ItemCatalogImpl">
+    <property name="itemDao">
+      <ref bean="itemDao"/>
+    </property>
+  </bean>
+  
+  
+  <!-- ItemDao -->
+  <bean id="itemDao" class="store.dao.ItemDaoImpl">
+    <property name="dataSource">
+    	<ref bean="dataSource"/>
+    </property>
+  </bean>
+
+  <!-- UserDao -->
+  <bean id="userDao" class="store.dao.UserDaoImpl">
+    <property name="dataSource">
+      <ref bean="dataSource"/>
+    </property>
+  </bean>
+
+  <!-- UserCatalog -->
+  <bean id="userCatalog" class="store.logic.UserCatalogImpl">
+    <property name="userDao">
+      <ref bean="userDao"/>
+    </property>
+  </bean>
+  
+  <!-- CategoryDao -->
+  <bean id="categoryDao" class="store.dao.CategoryDaoImpl">
+    <property name="dataSource">
+      <ref bean="dataSource"/>
+    </property>
+  </bean>
+
+  <!-- EventDao -->
+  <bean id="eventDao" class="store.dao.EventDaoImpl">
+    <property name="dataSource">
+      <ref bean="dataSource"/>
+    </property>
+  </bean>
+
+  <!-- CategoryCatalog -->
+  <bean id="categoryCatalog" class="store.logic.CategoryCatalogImpl">
+    <property name="categoryDao">
+      <ref bean="categoryDao"/>
+    </property>
+  </bean>
+  
+  <!-- EventCatalog -->
+  <bean id="eventCatalog" class="store.logic.EventCatalogImpl">
+    <property name="eventDao">
+      <ref bean="eventDao"/>
+    </property>
+  </bean>
+
+  <!-- Shop -->
+  <bean id="shopSerivce" class="store.logic.ShopImpl">
+    <property name="itemCatalog">
+      <ref bean="itemCatalog"/>
+    </property>
+    <property name="userCatalog">
+      <ref bean="userCatalog"/>
+    </property>
+    <property name="categoryCatalog">
+      <ref bean="categoryCatalog"/>
+    </property>
+    <property name="eventCatalog">
+      <ref bean="eventCatalog"/>
+    </property>
+  </bean>
+  
+  <!-- Validator -->
+  <bean id="userEntryValidator" class="store.util.UserEntryValidator"/>
+  <bean id="categoryEntryValidator" class="store.util.CategoryEntryValidator"/>
+  
+  <!-- MessageSource -->
+  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames">
+      <list>
+        <value>messages</value>
+      <!--
+        <value>ApplicationResource</value>
+      -->
+      </list>
+    </property>
+  </bean>
+</beans>
