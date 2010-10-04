@@ -7,4 +7,7 @@ public interface ItemCatalog {
 	List getEventItemList(int index);
 	List getPage(int page);
 	Integer getNumPages();
+	void entry(Item item);
+	void delete(int id);
+	void update(Item item);
 }

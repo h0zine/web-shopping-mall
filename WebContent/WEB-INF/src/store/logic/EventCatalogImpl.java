@@ -17,4 +17,19 @@ public class EventCatalogImpl implements EventCatalog {
 		return this.eventDao.findAllEvent();
 	}
 
+	public void entry(Event event) {
+		this.eventDao.add(event);
+	}
+	
+	public void delete(int id) {
+		this.eventDao.delete(id);
+	}
+	
+	public Event get(int id) {
+		return this.eventDao.get(id);
+	}
+	
+	public void update(Event event) {
+		this.eventDao.update(event);
+	}
 }

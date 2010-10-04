@@ -24,18 +24,35 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	private static final String SELEC_ALL_ON_PAGE = "SELECT * FROM item ORDER BY item_id LIMIT ?,?";
 	private static final String SELECT_COUNT = "SELECT count(item_id) FROM item";
 	
+	
 	private class ItemRowMapper implements RowMapper
 	{
 		public Object mapRow(ResultSet rs, int rowNum) throws SQLException
 		{
-			Item item = new Item();
-			item.setItemId(new Integer(rs.getInt(1)));
-			item.setItemName(rs.getString(2));
-			item.setPrice(new Integer(rs.getInt(3)));
-			item.setDescription(rs.getString(4));
-			item.setPictureUrl(rs.getString(5));
+			if (rs.next()) {
+				Item item = new Item();
+				item.setItemId(new Integer(rs.getInt("item_id")));
+				item.setItemName(rs.getString("item_name"));
+				item.setPrice(new Integer(rs.getInt("price")));
+				item.setDescription(rs.getString("description"));
+				item.setPictureUrl(rs.getString("picture_url"));
+				item.setVisit(new Integer(rs.getInt("visit")));
+				item.setSold(new Integer(rs.getInt("sold")));
+				item.setAmount(new Integer(rs.getInt("amount")));
+				item.setLastSold(new java.util.Date(rs.getDate("last_sold").getTime()));
+				item.setLastVisit(new java.util.Date(rs.getDate("last_visit").getTime()));
+				item.setLastUpdate(new java.util.Date(rs.getDate("last_update").getTime()));
+				item.setCategoryId1(new Integer(rs.getInt("category_id_1")));
+				item.setCategoryId2(new Integer(rs.getInt("category_id_2")));
+				item.setCategoryId3(new Integer(rs.getInt("category_id_3")));
+				item.setEventId1(new Integer(rs.getInt("event_id_1")));
+				item.setEventId2(new Integer(rs.getInt("event_id_2")));
+				item.setEventId3(new Integer(rs.getInt("event_id_3")));
 			
-			return item;
+				return item;
+			}
+			else
+				return null;
 		}
 	}
 	
@@ -48,9 +65,9 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 				int numRec = rs.getInt(1);
 				
 				if (numRec % PAGE_SIZE == 0)
-					return new Integer(rs.getInt(numRec % PAGE_SIZE));
+					return new Integer(numRec % PAGE_SIZE);
 				else
-					return new Integer(rs.getInt(numRec % PAGE_SIZE + 1));
+					return new Integer(numRec % PAGE_SIZE + 1);
 				
 			}
 			else
@@ -107,6 +124,18 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	
 	public Integer getNumPage() {
 		return (Integer) getJdbcTemplate().query(ItemDaoImpl.SELECT_COUNT, new RsePageCount());
+	}
+
+	public void entry(Item item) {
+		getJdbcTemplate().update("INSERT", new implements PreparedStatementSetter() { public void setValues(PreparedStatement pstmt) throws SQLException {}})
+	}
+	
+	public void delete(int id) {
+		
+	}
+	
+	public void update(Item item) {
+		
 	}
 }
 

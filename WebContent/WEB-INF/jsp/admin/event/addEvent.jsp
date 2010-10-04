@@ -5,23 +5,17 @@
 <title><spring:message code="store.name"/> - 카테고리 등록</title>
 </head>
 <body>
-<form  name="frm" action="addCategory.oz" method="post">
-<spring:bind path="category">
+<form  name="frm" action="addEvent.oz" method="post">
+<spring:bind path="event">
   <font color="red"><c:out value="${status.errorMessage}"/></font>
-</spring:bind>
-
-<spring:bind path="category.parent">
-	<input type="hidden"
-		name ="<c:out value="${status.expression}"/>"
-		value="<c:out value="${param.parent}"/>">
 </spring:bind>
 
 <font color="red"><c:out value="${loginErrorMsg }"/></font>
 <table>
 	<tr>
-		<td>카테고리명</td>
+		<td>Event 명</td>
 		<td>
-			<spring:bind path="category.name">
+			<spring:bind path="event.eventName">
 			<input type="text"
 				name="<c:out value="${status.expression}"/>"
 				value="<c:out value="${status.value}"/>" maxlength="20">

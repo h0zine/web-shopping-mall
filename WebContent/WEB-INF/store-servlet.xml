@@ -12,9 +12,9 @@
         <prop key="/member/join.oz">userEntryFormController</prop>
         <prop key="/index.oz">indexController</prop>
         <prop key="/admin/index.oz">adminIndexController</prop>
-        <prop key="/admin/item/index.oz">adminItemController</prop>
         <prop key="/admin/member/index.oz">adminMemberController</prop>
         <prop key="/admin/board/index.oz">adminBoardController</prop>
+
         <!-- category -->
         <prop key="/admin/category/index.oz">adminCategoryController</prop>
         <prop key="/admin/category/addCategory.oz">adminAddCategoryController</prop>
@@ -22,10 +22,17 @@
         <prop key="/admin/category/editCategory.oz">adminEditCategoryController</prop>
         
         <!-- event -->
-        <prop key="/admin/event/index.oz">adminCategoryController</prop>
+        <prop key="/admin/event/index.oz">adminEventController</prop>
         <prop key="/admin/event/addEvent.oz">adminAddEventController</prop>
         <prop key="/admin/event/delEvent.oz">adminDelEventController</prop>
         <prop key="/admin/event/editEvent.oz">adminEditEventController</prop>
+        
+        <!-- items -->
+        <prop key="/admin/item/index.oz">adminItemController</prop>
+        <prop key="/admin/item/addItem.oz">adminAddItemController</prop>
+        <prop key="/admin/item/delItem.oz">adminDelItemController</prop>
+        <prop key="/admin/item/edtItem.oz">adminEditItemController</prop>
+
       </props>
     </property>
   </bean>
@@ -48,9 +55,6 @@
   <bean id="adminIndexController" class="store.web.controller.admin.AdminIndexController">
   </bean>
   
-  <bean id="adminItemController" class="store.web.controller.admin.item.AdminItemController">
-  </bean>
-
   <bean id="adminMemberController" class="store.web.controller.admin.member.AdminMemberController">
   </bean>
 
@@ -105,7 +109,7 @@
     	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
 
-  <bean id="adminEditEventController" class="store.web.controller.admin.event.AdminEditCategoryController">
+  <bean id="adminEditEventController" class="store.web.controller.admin.event.AdminEditEventController">
   	<property name="sessionForm"><value>false</value></property>
   	<property name="commandName"><value>event</value></property>
   	<property name="commandClass"><value>store.logic.Event</value></property>
@@ -114,6 +118,34 @@
   	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
   <!-- Event controller end -->
+
+  <!-- Item controller start -->
+  <bean id="adminItemController" class="store.web.controller.admin.item.AdminItemController">
+    	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminAddItemController" class="store.web.controller.admin.item.AdminAddItemController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>item</value></property>
+  	<property name="commandClass"><value>store.logic.Item</value></property>
+  	<property name="formView"><value>admin.itemEntry</value></property>
+  	<property name="successView"><value>admin.itemEntrySuccess</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminDelItemController" class="store.web.controller.admin.item.AdminDelItemController">
+    	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminEditItemController" class="store.web.controller.admin.item.AdminEditItemController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>item</value></property>
+  	<property name="commandClass"><value>store.logic.Item</value></property>
+  	<property name="formView"><value>admin.itemEdit</value></property>
+  	<property name="successView"><value>admin.itemEditSuccess</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  <!-- Item controller end -->
   
   <!-- ViewResolver -->
   <bean id="resourceBundleViewResolver"

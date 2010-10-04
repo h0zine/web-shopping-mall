@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="category.oz">가입이 완료되었습니다.</a>
+<a href="index.oz">등록이 완료되었습니다.</a>
 </body>
 </html>

@@ -34,7 +34,7 @@ public class AdminItemController implements Controller
 		
 		// Have to return ModelAndView object... don't forget this!
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin.category");
+		modelAndView.setViewName("admin.item");
 		modelAndView.addAllObjects(model);
 		return modelAndView;
 	}

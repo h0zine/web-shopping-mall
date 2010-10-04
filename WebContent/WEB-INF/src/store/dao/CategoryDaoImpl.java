@@ -187,7 +187,6 @@ public class CategoryDaoImpl extends JdbcDaoSupport implements CategoryDao
 	}
 
 	public void update(Category category) {
-		System.out.println(">>>>>>>>>>>>>>>> update");
 		getJdbcTemplate().update(CategoryDaoImpl.UPDATE_CATEGORY, new PstmtSetterForUpdateCategory(category));
 	}
 }

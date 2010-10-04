@@ -24,11 +24,11 @@ public class AdminEventController implements Controller
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		Map model = new HashMap();
-		model.put(WebConstants.CATEGORY_LIST, shopService.getAllCategory());
+		model.put(WebConstants.EVENT_LIST, shopService.getAllEvent());
 		
 		// Have to return ModelAndView object... don't forget this!
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin.category");
+		modelAndView.setViewName("admin.event");
 		modelAndView.addAllObjects(model);
 		return modelAndView;
 	}

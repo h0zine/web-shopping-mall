@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import store.logic.Shop;
-import store.logic.Category;
+import store.logic.Event;
 import store.web.WebConstants;
 
 public class AdminAddEventController extends SimpleFormController 
@@ -27,13 +27,13 @@ public class AdminAddEventController extends SimpleFormController
 	protected ModelAndView onSubmit(HttpServletRequest req, HttpServletResponse res, Object cmd, BindException exception) throws Exception
 	{
 		// Casting command
-		Category category = (Category) cmd;
+		Event event = (Event) cmd;
 
 		try {
-			this.shopService.entryCategory(category);
+			this.shopService.entryEvent(event);
 			
 			ModelAndView modelAndView = new ModelAndView(getSuccessView());
-			modelAndView.addObject(WebConstants.CATEGORY_LIST, category);
+			modelAndView.addObject(WebConstants.EVENT_LIST, event);
 			return modelAndView;
 		}
 		catch (DataIntegrityViolationException e) 
