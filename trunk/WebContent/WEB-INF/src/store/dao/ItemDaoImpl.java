@@ -127,7 +127,7 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	}
 
 	public void entry(Item item) {
-		getJdbcTemplate().update("INSERT", new implements PreparedStatementSetter() { public void setValues(PreparedStatement pstmt) throws SQLException {}})
+		//getJdbcTemplate().update("INSERT", new implements PreparedStatementSetter() { public void setValues(PreparedStatement pstmt) throws SQLException {}})
 	}
 	
 	public void delete(int id) {
