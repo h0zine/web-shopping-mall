@@ -27,4 +27,14 @@ public class ItemCatalogImpl implements ItemCatalog
 	public Integer getNumPages() {
 		return this.itemDao.getNumPage();
 	}
+
+	public void entry(Item item) {
+		this.itemDao.entry(item);
+	}
+	public void delete(int id) {
+		this.itemDao.delete(id);
+	}
+	public void update(Item item) {
+		this.itemDao.update(item);
+	}
 }

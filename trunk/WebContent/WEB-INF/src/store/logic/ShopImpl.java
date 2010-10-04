@@ -31,6 +31,18 @@ public class ShopImpl implements Shop {
 		return this.itemCatalog.getNumPages();
 	}
 
+	public void entryItem(Item item) {
+		this.itemCatalog.entry(item);
+	}
+	
+	public void deleteItem(int id) {
+		this.itemCatalog.delete(id);
+	}
+	
+	public void updateItem(Item item) {
+		this.itemCatalog.update(item);
+	}
+
 	// event item
 	public List getEventItemList(int index)
 	{
@@ -83,6 +95,23 @@ public class ShopImpl implements Shop {
 	{
 		return this.eventCatalog.findAllEvent();
 	}
+	
+	public void entryEvent(Event event) {
+		this.eventCatalog.entry(event);
+	}
+	
+	public void deleteEvent(int id) {
+		this.eventCatalog.delete(id);
+	}
+	
+	public Event getEvent(int id) {
+		return this.eventCatalog.get(id);
+	}
+	
+	public void updateEvent(Event event) {
+		this.eventCatalog.update(event);
+	}
+	
 
 	// user 
 	public void setUserCatalog(UserCatalog userCatalog)

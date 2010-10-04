@@ -22,7 +22,7 @@ public class Event
 		this.event_name = event_name;
 	}
 	public Integer getEventOrder() {
-		return event_order;
+		return event_order == null ? new Integer(0) : event_order;
 	}
 	public void setEventOrder(Integer event_order) {
 		this.event_order = event_order;

@@ -24,15 +24,15 @@ public class AdminDelEventController implements Controller
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		try {
-			shopService.deleteCategory(Integer.parseInt(req.getParameter("id")));
+			shopService.deleteEvent(Integer.parseInt(req.getParameter("id")));
 		} catch (Exception e) {}
 		
 		Map model = new HashMap();
-		model.put(WebConstants.CATEGORY_LIST, shopService.getAllCategory());
+		model.put(WebConstants.EVENT_LIST, shopService.getAllEvent());
 		
 		// Have to return ModelAndView object... don't forget this!
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin.category");
+		modelAndView.setViewName("admin.event");
 		modelAndView.addAllObjects(model);
 		return modelAndView;
 	}

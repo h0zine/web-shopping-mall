@@ -5,24 +5,12 @@
 <title><spring:message code="store.name"/> - 카테고리 수정</title>
 </head>
 <body>
-<form  name="frm" action="editCategory.oz" method="post">
-<spring:bind path="category">
+<form  name="frm" action="editEvent.oz" method="post">
+<spring:bind path="event">
   <font color="red"><c:out value="${status.errorMessage}"/></font>
 </spring:bind>
 
-<spring:bind path="category.parent">
-	<input type="hidden"
-		name ="<c:out value="${status.expression}"/>"
-		value="<c:out value="${status.value}"/>">
-</spring:bind>
-
-<spring:bind path="category.id">
-	<input type="hidden"
-		name ="<c:out value="${status.expression}"/>"
-		value="<c:out value="${status.value}"/>">
-</spring:bind>
-
-<spring:bind path="category.depth">
+<spring:bind path="event.eventId">
 	<input type="hidden"
 		name ="<c:out value="${status.expression}"/>"
 		value="<c:out value="${status.value}"/>">
@@ -33,7 +21,7 @@
 	<tr>
 		<td>카테고리명</td>
 		<td>
-			<spring:bind path="category.name">
+			<spring:bind path="event.eventName">
 			<input type="text"
 				name="<c:out value="${status.expression}"/>"
 				value="<c:out value="${status.value}"/>" maxlength="20">

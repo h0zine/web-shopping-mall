@@ -9,6 +9,9 @@ public interface Shop
 	List getEventItemList(int index);
 	List getItemsPage(int page);
 	Integer getItemsPages();
+	void entryItem(Item item);
+	void deleteItem(int id);
+	void updateItem(Item item);
 	
 	// Category related methods
 	List getChildCategory(int parent);
@@ -20,6 +23,10 @@ public interface Shop
 	
 	// Event related methods
 	List getAllEvent();
+	void entryEvent(Event event);
+	void deleteEvent(int id);
+	Event getEvent(int id);
+	void updateEvent(Event event);
 	
 	void entryUser(User user);
 }

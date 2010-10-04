@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import store.logic.Shop;
-import store.logic.Category;
+import store.logic.Event;
 import store.web.WebConstants;
 
 public class AdminEditEventController extends SimpleFormController 
@@ -27,13 +27,13 @@ public class AdminEditEventController extends SimpleFormController
 	{
 	    if(!isFormSubmission(request)) {
 	    	
-	        Category category = null;
+	        Event event = null;
 	        
 	        try {
-	        	category = shopService.getCategory(Integer.parseInt(request.getParameter("id")));
+	        	event = shopService.getEvent(Integer.parseInt(request.getParameter("id")));
 	        } catch (Exception e) {}
 	        
-	        return category;
+	        return event;
 	    }
 	    else {
 	        return super.formBackingObject(request);
@@ -42,16 +42,16 @@ public class AdminEditEventController extends SimpleFormController
 	
 	protected ModelAndView onSubmit(HttpServletRequest req, HttpServletResponse res, Object cmd, BindException exception) throws Exception
 	{
-		Category category = (Category) cmd;
+		Event event = (Event) cmd;
 
-		shopService.updateCategory(category);
+		shopService.updateEvent(event);
 		
 		Map model = new HashMap();
-		model.put(WebConstants.CATEGORY_LIST, shopService.getAllCategory());
+		model.put(WebConstants.EVENT_LIST, shopService.getAllEvent());
 		
 		// Have to return ModelAndView object... don't forget this!
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin.category");
+		modelAndView.setViewName("admin.event");
 		modelAndView.addAllObjects(model);
 		
 		return modelAndView;
