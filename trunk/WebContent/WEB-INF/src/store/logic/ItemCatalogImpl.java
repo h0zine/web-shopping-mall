@@ -37,4 +37,7 @@ public class ItemCatalogImpl implements ItemCatalog
 	public void update(Item item) {
 		this.itemDao.update(item);
 	}
+	public Item getItem(int id) {
+		return this.itemDao.get(id);
+	}
 }

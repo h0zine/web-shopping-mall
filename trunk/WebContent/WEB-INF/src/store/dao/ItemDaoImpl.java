@@ -26,41 +26,39 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	private static final String INSERT_ITEM =
 		"INSERT INTO item (item_name, price, description, picture_url, visit, sold, amount, " +
 		"last_sold, last_visit, last_update, category_id_1, category_id_2, category_id_3, " +
-		"event_id_1, event_id_2, event_id3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		"event_id_1, event_id_2, event_id_3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_ITEM = "DELETE FROM item WHERE item_id = ?";
 	private static final String UPDATE_ITEM =
 		"UPDATE item SET item_name=?, price=?, description=?, picture_url=?, visit=?, sold, amount=?, " +
 		"last_sold=?, last_visit=?, last_update=?, category_id_1=?, category_id_2=?, category_id_3=?, " +
-		"event_id_1=?, event_id_2=?, event_id3=? WHERE item_id = ?";
+		"event_id_1=?, event_id_2=?, event_id_3=? WHERE item_id = ?";
+	private static final String GET_ITEM = "SELECT * FROM item WHERE item_id = ?";
 	
 	private class ItemRowMapper implements RowMapper
 	{
 		public Object mapRow(ResultSet rs, int rowNum) throws SQLException
 		{
-			if (rs.next()) {
-				Item item = new Item();
-				item.setItemId(new Integer(rs.getInt("item_id")));
-				item.setItemName(rs.getString("item_name"));
-				item.setPrice(new Integer(rs.getInt("price")));
-				item.setDescription(rs.getString("description"));
-				item.setPictureUrl(rs.getString("picture_url"));
-				item.setVisit(new Integer(rs.getInt("visit")));
-				item.setSold(new Integer(rs.getInt("sold")));
-				item.setAmount(new Integer(rs.getInt("amount")));
-				item.setLastSold(new java.util.Date(rs.getDate("last_sold").getTime()));
-				item.setLastVisit(new java.util.Date(rs.getDate("last_visit").getTime()));
-				item.setLastUpdate(new java.util.Date(rs.getDate("last_update").getTime()));
-				item.setCategoryId1(new Integer(rs.getInt("category_id_1")));
-				item.setCategoryId2(new Integer(rs.getInt("category_id_2")));
-				item.setCategoryId3(new Integer(rs.getInt("category_id_3")));
-				item.setEventId1(new Integer(rs.getInt("event_id_1")));
-				item.setEventId2(new Integer(rs.getInt("event_id_2")));
-				item.setEventId3(new Integer(rs.getInt("event_id_3")));
+			Item item = new Item();
 			
-				return item;
-			}
-			else
-				return null;
+			item.setItemId(new Integer(rs.getInt("item_id")));
+			item.setItemName(rs.getString("item_name"));
+			item.setPrice(new Integer(rs.getInt("price")));
+			item.setDescription(rs.getString("description"));
+			item.setPictureUrl(rs.getString("picture_url"));
+			item.setVisit(new Integer(rs.getInt("visit")));
+			item.setSold(new Integer(rs.getInt("sold")));
+			item.setAmount(new Integer(rs.getInt("amount")));
+			item.setLastSold(new java.util.Date(rs.getDate("last_sold").getTime()));
+			item.setLastVisit(new java.util.Date(rs.getDate("last_visit").getTime()));
+			item.setLastUpdate(new java.util.Date(rs.getDate("last_update").getTime()));
+			item.setCategoryId1(new Integer(rs.getInt("category_id_1")));
+			item.setCategoryId2(new Integer(rs.getInt("category_id_2")));
+			item.setCategoryId3(new Integer(rs.getInt("category_id_3")));
+			item.setEventId1(new Integer(rs.getInt("event_id_1")));
+			item.setEventId2(new Integer(rs.getInt("event_id_2")));
+			item.setEventId3(new Integer(rs.getInt("event_id_3")));
+		
+			return item;
 		}
 	}
 	
@@ -155,6 +153,20 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 		}
 	}
 	
+	private class PstmtSetterGetItem implements PreparedStatementSetter
+	{
+		private int id;
+		
+		public PstmtSetterGetItem(int id) {
+			this.id = id;
+		}
+		
+		public void setValues(PreparedStatement pstmt) throws SQLException {
+			pstmt.setInt(1, id);
+		}
+		
+	}
+	
 	public List findAll() {
 		return getJdbcTemplate().query(ItemDaoImpl.SELECT_ALL, new ItemRowMapper());
 	}
@@ -215,6 +227,10 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	
 	public void update(Item item) {
 		getJdbcTemplate().update(ItemDaoImpl.UPDATE_ITEM, new PstmtSetterUpdateItem(item));
+	}
+	
+	public Item get(int id) {
+		return (Item) getJdbcTemplate().query(ItemDaoImpl.GET_ITEM, new PstmtSetterGetItem(id), new ItemRowMapper());
 	}
 }
 

@@ -42,6 +42,10 @@ public class ShopImpl implements Shop {
 	public void updateItem(Item item) {
 		this.itemCatalog.update(item);
 	}
+	
+	public Item getItem(int id) {
+		return this.itemCatalog.getItem(id);
+	}
 
 	// event item
 	public List getEventItemList(int index)

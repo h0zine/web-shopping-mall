@@ -13,4 +13,5 @@ public interface ItemDao
 	void entry(Item item);
 	void delete(int id);
 	void update(Item item);
+	Item get(int id);
 }

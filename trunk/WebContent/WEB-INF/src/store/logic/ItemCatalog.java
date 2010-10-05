@@ -10,4 +10,5 @@ public interface ItemCatalog {
 	void entry(Item item);
 	void delete(int id);
 	void update(Item item);
+	Item getItem(int id);
 }

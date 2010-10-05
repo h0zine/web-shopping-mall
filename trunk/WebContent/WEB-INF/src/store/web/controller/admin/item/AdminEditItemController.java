@@ -6,12 +6,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import store.logic.Shop;
-import store.logic.Event;
+import store.logic.Item;
 import store.web.WebConstants;
 
 public class AdminEditItemController extends SimpleFormController 
@@ -27,13 +28,14 @@ public class AdminEditItemController extends SimpleFormController
 	{
 	    if(!isFormSubmission(request)) {
 	    	
-	        Event event = null;
+	        Item item = null;
 	        
 	        try {
-	        	event = shopService.getEvent(Integer.parseInt(request.getParameter("id")));
+	        	item = shopService.getItem(Integer.parseInt(request.getParameter("id")));
+	        	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "+item);
 	        } catch (Exception e) {}
 	        
-	        return event;
+	        return item;
 	    }
 	    else {
 	        return super.formBackingObject(request);
@@ -42,18 +44,18 @@ public class AdminEditItemController extends SimpleFormController
 	
 	protected ModelAndView onSubmit(HttpServletRequest req, HttpServletResponse res, Object cmd, BindException exception) throws Exception
 	{
-		Event event = (Event) cmd;
+		Item item = (Item) cmd;
 
-		shopService.updateEvent(event);
-		
-		Map model = new HashMap();
-		model.put(WebConstants.EVENT_LIST, shopService.getAllEvent());
-		
-		// Have to return ModelAndView object... don't forget this!
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin.event");
-		modelAndView.addAllObjects(model);
-		
-		return modelAndView;
+		try {
+			this.shopService.updateItem(item);
+			
+			ModelAndView modelAndView = new ModelAndView(getSuccessView());
+			return modelAndView;
+		}
+		catch (DataIntegrityViolationException e) 
+		{
+			exception.reject("error.duplicate");
+			return showForm(req, res, exception);
+		}
 	}
 }

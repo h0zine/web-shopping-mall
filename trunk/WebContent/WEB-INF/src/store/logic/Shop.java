@@ -12,6 +12,7 @@ public interface Shop
 	void entryItem(Item item);
 	void deleteItem(int id);
 	void updateItem(Item item);
+	Item getItem(int id);
 	
 	// Category related methods
 	List getChildCategory(int parent);
