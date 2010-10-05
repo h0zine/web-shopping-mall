@@ -23,7 +23,15 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	private static final String SELECT_EVENT_ITEM = "SELECT * FROM item WHERE event_id = ?";
 	private static final String SELEC_ALL_ON_PAGE = "SELECT * FROM item ORDER BY item_id LIMIT ?,?";
 	private static final String SELECT_COUNT = "SELECT count(item_id) FROM item";
-	
+	private static final String INSERT_ITEM =
+		"INSERT INTO item (item_name, price, description, picture_url, visit, sold, amount, " +
+		"last_sold, last_visit, last_update, category_id_1, category_id_2, category_id_3, " +
+		"event_id_1, event_id_2, event_id3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String DELETE_ITEM = "DELETE FROM item WHERE item_id = ?";
+	private static final String UPDATE_ITEM =
+		"UPDATE item SET item_name=?, price=?, description=?, picture_url=?, visit=?, sold, amount=?, " +
+		"last_sold=?, last_visit=?, last_update=?, category_id_1=?, category_id_2=?, category_id_3=?, " +
+		"event_id_1=?, event_id_2=?, event_id3=? WHERE item_id = ?";
 	
 	private class ItemRowMapper implements RowMapper
 	{
@@ -74,7 +82,78 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 				return new Integer(0);
 		}
 	}
+
+	private class PstmtSetterInsertItem implements PreparedStatementSetter
+	{
+		Item item;
+		
+		public PstmtSetterInsertItem(Item item) {
+			this.item = item;
+		}
+		
+		public void setValues(PreparedStatement pstmt) throws SQLException
+		{
+			pstmt.setString(1,item.getItemName());
+			pstmt.setInt(2, item.getPrice().intValue());
+			pstmt.setString(3, item.getDescription());
+			pstmt.setString(4, item.getPictureUrl());
+			pstmt.setInt(5, item.getVisit().intValue());
+			pstmt.setInt(6, item.getSold().intValue());
+			pstmt.setInt(7, item.getAmount().intValue());
+			pstmt.setDate(8, new java.sql.Date(item.getLastSold().getTime()));
+			pstmt.setDate(9, new java.sql.Date(item.getLastVisit().getTime()));
+			pstmt.setDate(10, new java.sql.Date(item.getLastUpdate().getTime()));
+			pstmt.setInt(11, item.getCategoryId1().intValue());
+			pstmt.setInt(12, item.getCategoryId2().intValue());
+			pstmt.setInt(13, item.getCategoryId3().intValue());
+			pstmt.setInt(14, item.getEventId1().intValue());
+			pstmt.setInt(15, item.getEventId2().intValue());
+			pstmt.setInt(16, item.getEventId3().intValue());
+		}
+	}
 	
+	private class PstmtSetterDeleteItem implements PreparedStatementSetter
+	{
+		int item_id;
+		
+		public PstmtSetterDeleteItem(int item_id) {
+			this.item_id = item_id;
+		}
+		
+		public void setValues(PreparedStatement pstmt) throws SQLException
+		{
+			pstmt.setInt(1, item_id);
+		}
+	}
+	
+	private class PstmtSetterUpdateItem implements PreparedStatementSetter
+	{
+		Item item;
+		
+		public PstmtSetterUpdateItem(Item item) {
+			this.item = item;
+		}
+		
+		public void setValues(PreparedStatement pstmt) throws SQLException {
+			pstmt.setString(1,item.getItemName());
+			pstmt.setInt(2, item.getPrice().intValue());
+			pstmt.setString(3, item.getDescription());
+			pstmt.setString(4, item.getPictureUrl());
+			pstmt.setInt(5, item.getVisit().intValue());
+			pstmt.setInt(6, item.getSold().intValue());
+			pstmt.setInt(7, item.getAmount().intValue());
+			pstmt.setDate(8, new java.sql.Date(item.getLastSold().getTime()));
+			pstmt.setDate(9, new java.sql.Date(item.getLastVisit().getTime()));
+			pstmt.setDate(10, new java.sql.Date(item.getLastUpdate().getTime()));
+			pstmt.setInt(11, item.getCategoryId1().intValue());
+			pstmt.setInt(12, item.getCategoryId2().intValue());
+			pstmt.setInt(13, item.getCategoryId3().intValue());
+			pstmt.setInt(14, item.getEventId1().intValue());
+			pstmt.setInt(15, item.getEventId2().intValue());
+			pstmt.setInt(16, item.getEventId3().intValue());
+			pstmt.setInt(17, item.getItemId().intValue());
+		}
+	}
 	
 	public List findAll() {
 		return getJdbcTemplate().query(ItemDaoImpl.SELECT_ALL, new ItemRowMapper());
@@ -127,15 +206,15 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	}
 
 	public void entry(Item item) {
-		//getJdbcTemplate().update("INSERT", new implements PreparedStatementSetter() { public void setValues(PreparedStatement pstmt) throws SQLException {}})
+		getJdbcTemplate().update(ItemDaoImpl.INSERT_ITEM, new PstmtSetterInsertItem(item));
 	}
 	
 	public void delete(int id) {
-		
+		getJdbcTemplate().update(ItemDaoImpl.DELETE_ITEM, new PstmtSetterDeleteItem(id));
 	}
 	
 	public void update(Item item) {
-		
+		getJdbcTemplate().update(ItemDaoImpl.UPDATE_ITEM, new PstmtSetterUpdateItem(item));
 	}
 }
 
