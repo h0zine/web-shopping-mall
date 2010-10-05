@@ -2,6 +2,7 @@ package store.web.controller.admin.item;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,8 @@ public class AdminItemController implements Controller
 		} catch (Exception e) {}
 		
 		Map model = new HashMap();
-		model.put(WebConstants.ITEM_LIST, shopService.getItemsPage(page));
+		List list = shopService.getItemsPage(page);
+		model.put(WebConstants.ITEM_LIST, list);
 		model.put(WebConstants.ITEM_PAGE, shopService.getItemsPages());
 		
 		// Have to return ModelAndView object... don't forget this!

@@ -12,6 +12,7 @@ import store.logic.Shop;
 import store.logic.Item;
 import store.web.WebConstants;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -45,11 +46,16 @@ public class AdminAddItemController extends SimpleFormController
 		// Casting command
 		Item item = (Item) cmd;
 
+		item.setVisit(new Integer(0));
+		item.setSold(new Integer(0));
+		item.setLastSold(new java.util.Date());
+		item.setLastVisit(new java.util.Date());
+		item.setLastUpdate(new java.util.Date());
+
 		try {
 			this.shopService.entryItem(item);
 			
 			ModelAndView modelAndView = new ModelAndView(getSuccessView());
-			//modelAndView.addObject(WebConstants.EVENT_LIST, event);
 			return modelAndView;
 		}
 		catch (DataIntegrityViolationException e) 

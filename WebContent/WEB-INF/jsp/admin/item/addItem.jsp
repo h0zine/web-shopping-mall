@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jsp/jsp_header.jsp" %>    
 <html>
 <head>
-<title><spring:message code="store.name"/> - 카테고리 등록</title>
+<title><spring:message code="store.name"/> - 상품 등록</title>
 </head>
 <body>
 <form  name="frm" action="addItem.oz" method="post">
@@ -126,14 +126,17 @@
 				<option value="<c:out value="${event.eventId }"/>"><c:out value="${event.eventName }"/></option>
 			</c:forEach>
 			</select>
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
+			<font color="red"><c:out value="${status.errorMessage}"/></font>
 			</spring:bind>
 		</td>
 	</tr>
 	<tr>
 		<td>설명</td>
 		<td>
-		<textarea rows="20" cols="80"></textarea>
+			<spring:bind path="item.description">
+			<textarea rows="20" cols="80" name="<c:out value="${status.expression}"/>"></textarea>
+			<font color="red"><c:out value="${status.errorMessage}"/></font>
+			</spring:bind>
 		</td>
 	</tr>
 	<tr>
