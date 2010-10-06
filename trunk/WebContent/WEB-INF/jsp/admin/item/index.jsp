@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/jsp/jsp_header.jsp" %>
+<%
+	int pg;
+	try {
+		pg = Integer.parseInt(request.getParameter("page"));
+	} catch (Exception e) {
+		pg = 1;
+	}
+%>
 <html>
 <head>
 <title>包府磊 皋春 - 惑前包府</title>
@@ -29,7 +37,7 @@
 		<td align="center"><fmt:formatDate type="date" value="${item.lastUpdate}" /></td>
 		<td align="center"><fmt:formatDate type="date" value="${item.lastSold}" /></td>
 		<td>
-			[<a href="delItem.oz?id=<c:out value="${item.itemId }"/>">-</a>] 
+			[<a href="delItem.oz?id=<c:out value="${item.itemId }"/>&page=<c:out value="${pg }"/>>">-</a>] 
 			[<a href="editItem.oz?id=<c:out value="${item.itemId }"/>">=</a>]</td>
 	</tr>
 	</c:forEach>

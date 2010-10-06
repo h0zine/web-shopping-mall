@@ -15,24 +15,29 @@
         <prop key="/admin/member/index.oz">adminMemberController</prop>
         <prop key="/admin/board/index.oz">adminBoardController</prop>
 
-        <!-- category -->
+        <!-- admin category -->
         <prop key="/admin/category/index.oz">adminCategoryController</prop>
         <prop key="/admin/category/addCategory.oz">adminAddCategoryController</prop>
         <prop key="/admin/category/delCategory.oz">adminDelCategoryController</prop>
         <prop key="/admin/category/editCategory.oz">adminEditCategoryController</prop>
         
-        <!-- event -->
+        <!-- admin event -->
         <prop key="/admin/event/index.oz">adminEventController</prop>
         <prop key="/admin/event/addEvent.oz">adminAddEventController</prop>
         <prop key="/admin/event/delEvent.oz">adminDelEventController</prop>
         <prop key="/admin/event/editEvent.oz">adminEditEventController</prop>
         
-        <!-- items -->
+        <!-- admin items -->
         <prop key="/admin/item/index.oz">adminItemController</prop>
         <prop key="/admin/item/addItem.oz">adminAddItemController</prop>
         <prop key="/admin/item/delItem.oz">adminDelItemController</prop>
         <prop key="/admin/item/edtItem.oz">adminEditItemController</prop>
 
+		<!-- admin member -->
+		<prop key="/admin/member/index.oz">adminListMemberController</prop>
+        <prop key="/admin/member/addItem.oz">adminAddMemberController</prop>
+        <prop key="/admin/member/delItem.oz">adminDelMemberController</prop>
+        <prop key="/admin/member/edtItem.oz">adminEditMemberController</prop>
       </props>
     </property>
   </bean>
@@ -147,6 +152,26 @@
   </bean>
   <!-- Item controller end -->
   
+
+  <!-- Admin member controller start -->
+  <bean id="adminListMemberController" class="store.web.controller.admin.member.AdminListMemberController">
+    <property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  
+  <bean id="adminAddMemberController" class="store.web.controller.admin.member.AdminAddMemberController">
+    <property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  
+  <bean id="adminDelMemberController" class="store.web.controller.admin.member.AdminDelMemberController">
+    <property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  
+  <bean id="adminEditMemberController" class="store.web.controller.admin.member.AdminEditMemberController">
+    <property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  <!-- Admin member controller end -->
+  
+    
   <!-- ViewResolver -->
   <bean id="resourceBundleViewResolver"
         class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
