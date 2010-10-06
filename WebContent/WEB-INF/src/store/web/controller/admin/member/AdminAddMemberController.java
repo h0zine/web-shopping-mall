@@ -28,16 +28,10 @@ public class AdminAddMemberController extends SimpleFormController
 	protected ModelAndView onSubmit(HttpServletRequest req, HttpServletResponse res, Object cmd, BindException exception) throws Exception
 	{
 		// Casting command
-		Item item = (Item) cmd;
-
-		item.setVisit(new Integer(0));
-		item.setSold(new Integer(0));
-		item.setLastSold(new java.util.Date());
-		item.setLastVisit(new java.util.Date());
-		item.setLastUpdate(new java.util.Date());
+		User user = (User) cmd;
 
 		try {
-			this.shopService.entryItem(item);
+			this.shopService.entryUser(user);
 			
 			ModelAndView modelAndView = new ModelAndView(getSuccessView());
 			return modelAndView;
