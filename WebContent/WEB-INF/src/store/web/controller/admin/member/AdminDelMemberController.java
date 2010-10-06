@@ -1,4 +1,4 @@
-package store.web.controller.admin.item;
+package store.web.controller.admin.member;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.Controller;
 import store.logic.Shop;
 import store.web.WebConstants;
 
-public class AdminDelItemController implements Controller 
+public class AdminDelMemberController implements Controller 
 {
 	Shop shopService;
 	
