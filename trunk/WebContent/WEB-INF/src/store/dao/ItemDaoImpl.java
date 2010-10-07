@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.dao.DataRetrievalFailureException;
 
 import store.logic.Item;
 
@@ -80,6 +81,39 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 				return new Integer(0);
 		}
 	}
+
+	private class RsItem implements ResultSetExtractor
+	{
+		public Object extractData(ResultSet rs) throws SQLException, DataAccessException
+		{
+			if (rs.next()) {
+				Item item = new Item();
+				
+				item.setItemId(new Integer(rs.getInt("item_id")));
+				item.setItemName(rs.getString("item_name"));
+				item.setPrice(new Integer(rs.getInt("price")));
+				item.setDescription(rs.getString("description"));
+				item.setPictureUrl(rs.getString("picture_url"));
+				item.setVisit(new Integer(rs.getInt("visit")));
+				item.setSold(new Integer(rs.getInt("sold")));
+				item.setAmount(new Integer(rs.getInt("amount")));
+				item.setLastSold(new java.util.Date(rs.getDate("last_sold").getTime()));
+				item.setLastVisit(new java.util.Date(rs.getDate("last_visit").getTime()));
+				item.setLastUpdate(new java.util.Date(rs.getDate("last_update").getTime()));
+				item.setCategoryId1(new Integer(rs.getInt("category_id_1")));
+				item.setCategoryId2(new Integer(rs.getInt("category_id_2")));
+				item.setCategoryId3(new Integer(rs.getInt("category_id_3")));
+				item.setEventId1(new Integer(rs.getInt("event_id_1")));
+				item.setEventId2(new Integer(rs.getInt("event_id_2")));
+				item.setEventId3(new Integer(rs.getInt("event_id_3")));
+			
+				return item;
+			}
+			else
+				throw new DataRetrievalFailureException("Item data is not available.");
+		}
+	}
+
 
 	private class PstmtSetterInsertItem implements PreparedStatementSetter
 	{
@@ -230,7 +264,7 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	}
 	
 	public Item get(int id) {
-		return (Item) getJdbcTemplate().query(ItemDaoImpl.GET_ITEM, new PstmtSetterGetItem(id), new ItemRowMapper());
+		return (Item) getJdbcTemplate().query(ItemDaoImpl.GET_ITEM, new PstmtSetterGetItem(id), new RsItem());
 	}
 }
 

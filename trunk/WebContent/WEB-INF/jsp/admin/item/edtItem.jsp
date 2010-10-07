@@ -4,7 +4,16 @@
 <head>
 <title><spring:message code="store.name"/> - 상품 수정</title>
 </head>
+<script type="text/javascript" src="/WEB-INF/js/jquery-1.4.2.js"></script>     
+<script type="text/javascript">                                         
+	$(document).ready(function() {
+	   $("a").click(function() {
+	     alert("Hello world!");
+	   });
+	 });
+</script>
 <body>
+<a href="">test</a>
 <form  name="frm" action="addItem.oz" method="post">
 <font color="red"><c:out value="${loginErrorMsg }"/></font>
 <table>
@@ -134,7 +143,7 @@
 		<td>설명</td>
 		<td>
 			<spring:bind path="item.description">
-			<textarea rows="20" cols="80" name="<c:out value="${status.expression}"/>"></textarea>
+			<textarea rows="20" cols="80" name="<c:out value="${status.expression}"/>"><c:out value="${status.value}"/></textarea>
 			<font color="red"><c:out value="${status.errorMessage}"/></font>
 			</spring:bind>
 		</td>

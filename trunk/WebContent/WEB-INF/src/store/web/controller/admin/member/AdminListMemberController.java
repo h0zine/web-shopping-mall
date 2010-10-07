@@ -12,9 +12,9 @@ public class AdminListMemberController implements Controller
 {
 	private Shop shopService;
 	
-	public Shop getShopService() 
+	public void setShopService(Shop shopService) 
 	{
-		return this.shopService;
+		this.shopService = shopService;
 	}
 
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception

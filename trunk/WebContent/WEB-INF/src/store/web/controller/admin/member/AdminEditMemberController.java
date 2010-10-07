@@ -1,8 +1,5 @@
 package store.web.controller.admin.member;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,7 +10,6 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import store.logic.Shop;
 import store.logic.Item;
-import store.web.WebConstants;
 
 public class AdminEditMemberController extends SimpleFormController 
 {
