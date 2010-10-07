@@ -6,9 +6,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 
 import store.logic.User;
 
@@ -34,7 +36,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 	private static final String UPDATE_BY_ID
 					= "UPDATE wiz_member SET" +
 					"passwd = ?, name = ?, photo = ?, icon = ?, nick = ?, resno = ?, email = ?, tphone = ?," +
-					"hphone = ?, comtel = ?, homepagepost = ?, address1 = ?, address2 = ?, reemail = ?, "+
+					"hphone = ?, comtel = ?, homepage = ?, post = ?, address1 = ?, address2 = ?, reemail = ?, "+
 					"resms = ?, birthday = ?, bgubun = ?, marriage = ?, memorial = ?, scholarship = ?, job = ?, " +
 					"income = ?, car = ?, hobby = ?, consph = ?, conprd = ?, level = ?, recom = ?, visit = ?, " +
 					"visit_time = ?, intro = ?, memo = ?, addinfo1 = ?, addinfo2 = ?, addinfo3 = ?, addinfo4 = ?" +
@@ -43,7 +45,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 	private static final String UPDATE_BY_EMAIL
 					= "UPDATE wiz_member SET" +
 					"id = ?, passwd = ?, name = ?, photo = ?, icon = ?, nick = ?, resno = ?, tphone = ?," +
-					"hphone = ?, comtel = ?, homepagepost = ?, address1 = ?, address2 = ?, reemail = ?, "+
+					"hphone = ?, comtel = ?, homepage = ?, post = ?, address1 = ?, address2 = ?, reemail = ?, "+
 					"resms = ?, birthday = ?, bgubun = ?, marriage = ?, memorial = ?, scholarship = ?, job = ?, " +
 					"income = ?, car = ?, hobby = ?, consph = ?, conprd = ?, level = ?, recom = ?, visit = ?, " +
 					"visit_time = ?, intro = ?, memo = ?, addinfo1 = ?, addinfo2 = ?, addinfo3 = ?, addinfo4 = ?" +
@@ -89,7 +91,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 			ps.setString(29, this.user.getLevel());
 			ps.setString(30, this.user.getRecom());
 			ps.setString(31, this.user.getVisit());
-			ps.setDate(32, new java.sql.Date(this.user.getVisit_time().getTime()));
+			ps.setDate(32, new java.sql.Date(this.user.getVisitTime().getTime()));
 			ps.setString(33, this.user.getIntro());
 			ps.setString(34, this.user.getMemo());
 			ps.setString(35, this.user.getAddinfo1());
@@ -189,7 +191,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 			pstmt.setString(28, this.user.getLevel());
 			pstmt.setString(29, this.user.getRecom());
 			pstmt.setString(30, this.user.getVisit());
-			pstmt.setDate(31, new java.sql.Date(this.user.getVisit_time().getTime()));
+			pstmt.setDate(31, new java.sql.Date(this.user.getVisitTime().getTime()));
 			pstmt.setString(32, this.user.getIntro());
 			pstmt.setString(33, this.user.getMemo());
 			pstmt.setString(34, this.user.getAddinfo1());
@@ -241,7 +243,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 			pstmt.setString(28, this.user.getLevel());
 			pstmt.setString(29, this.user.getRecom());
 			pstmt.setString(30, this.user.getVisit());
-			pstmt.setDate(31, new java.sql.Date(this.user.getVisit_time().getTime()));
+			pstmt.setDate(31, new java.sql.Date(this.user.getVisitTime().getTime()));
 			pstmt.setString(32, this.user.getIntro());
 			pstmt.setString(33, this.user.getMemo());
 			pstmt.setString(34, this.user.getAddinfo1());
@@ -255,10 +257,68 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 		}
 	}
 	
-	private class Rse implements ResultSetExtractor {
-
+	private class RseUser implements ResultSetExtractor {
 		public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
 
+			if (rs.next()) 
+			{
+				User user = new User();
+			
+				user.setId(rs.getString("id"));
+				user.setPasswd(rs.getString("passwd"));
+				user.setName(rs.getString("name"));
+				user.setPhoto(rs.getString("photo"));
+				user.setIcon(rs.getString("icon"));
+				user.setNick(rs.getString("nick")); 
+				user.setResno(rs.getString("resno")); 
+				user.setTphone(rs.getString("tphone")); 
+				user.setHphone(rs.getString("hphone")); 
+				user.setComtel(rs.getString("comtel"));
+				user.setHomepage(rs.getString("homepage"));
+				user.setPost(rs.getString("post"));
+				user.setAddress1(rs.getString("address1"));
+				user.setAddress2(rs.getString("address2"));
+				user.setReemail(rs.getString("reemail"));
+				user.setResms(rs.getString("resms"));
+				user.setBirthday(rs.getString("birthday"));
+				user.setBgubun(rs.getString("bgubun"));
+				user.setMarriage(rs.getString("marriage"));
+				user.setMemorial(rs.getString("memorial"));
+				user.setScholarship(rs.getString("scholarship"));
+				user.setJob(rs.getString("job"));
+				user.setIncome(rs.getString("income"));
+				user.setCar(rs.getString("car"));
+				user.setHobby(rs.getString("hobby"));
+				user.setConsph(rs.getString("consph"));
+				user.setConprd(rs.getString("conprd"));
+				user.setLevel(rs.getString("level"));
+				user.setRecom(rs.getString("recome"));
+				user.setVisit(rs.getString("visit"));
+				user.setVisitTime(new java.util.Date(rs.getDate("visit_time").getTime()));
+				user.setIntro(rs.getString("intro"));
+				user.setMemo(rs.getString("memo"));
+				user.setAddinfo1(rs.getString("addinfo1"));
+				user.setAddinfo2(rs.getString("addinfo2"));
+				user.setAddinfo3(rs.getString("addinfo3"));
+				user.setAddinfo4(rs.getString("addinfo4"));
+				user.setAddinfo5(rs.getString("addinfo5"));
+				user.setWdate(new java.util.Date(rs.getDate("wdate").getTime()));
+				user.setContury(rs.getString("country"));
+				user.setEmail(rs.getString("email"));
+				
+				return user;
+			}
+			else 
+				throw new DataRetrievalFailureException("Can't find the event.");
+		}
+		
+	}
+	
+	private class RmUser implements RowMapper
+	{
+
+		public Object mapRow(ResultSet rs, int rownum) throws SQLException {
+			// TODO Auto-generated method stub
 			return null;
 		}
 		
@@ -269,24 +329,23 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 	}
 
 	public User getById(String id) {
-		
-		return (User) getJdbcTemplate().query(UserDaoImpl.SELECT_BY_ID, rse)
+		return (User) getJdbcTemplate().query(UserDaoImpl.SELECT_BY_ID, new PstmtSetterSetId(id), new RseUser());
 	}
 	
 	public User getByEmail(String email) {
-		
+		return (User) getJdbcTemplate().query(UserDaoImpl.SELECT_BY_EMAIL, new PstmtSetterSetEmail(email), new RseUser());
 	}
 	
 	public void deleteById(String id) {
-		
+		getJdbcTemplate().update(UserDaoImpl.DELETE_BY_ID, new PstmtSetterSetId(id));
 	}
 	
 	public void deleteByEmail(String email) {
-		
+		getJdbcTemplate().update(UserDaoImpl.DELETE_BY_EMAIL, new PstmtSetterSetEmail(email));
 	}
 	
 	public List getAllList() {
-		
+		return (List) getJdbcTemplate().query(UserDaoImpl.SELECT_ALL, rowMapper)
 	}
 	
 	public List getPageList(int page) {

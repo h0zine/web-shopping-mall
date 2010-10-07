@@ -240,10 +240,10 @@ public class User
 	public void setVisit(String visit) {
 		this.visit = visit;
 	}
-	public Date getVisit_time() {
+	public Date getVisitTime() {
 		return visit_time;
 	}
-	public void setVisit_time(Date visit_time) {
+	public void setVisitTime(Date visit_time) {
 		this.visit_time = visit_time;
 	}
 	public String getIntro() {
