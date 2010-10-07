@@ -24,6 +24,15 @@ public class AdminEditItemController extends SimpleFormController
 		this.shopService = shopService;
 	}
 	
+	protected Map referenceData(HttpServletRequest request) throws Exception 
+	{
+		//System.out.println("referenceData()");
+		Map map = new HashMap();
+		map.put(WebConstants.CATEGORY_LIST, this.shopService.getAllCategory());
+		map.put(WebConstants.EVENT_LIST, this.shopService.getAllEvent());
+		return map;
+	}
+
 	protected Object formBackingObject(HttpServletRequest request) throws Exception
 	{
 	    if(!isFormSubmission(request)) {
@@ -32,7 +41,7 @@ public class AdminEditItemController extends SimpleFormController
 	        
 	        try {
 	        	item = shopService.getItem(Integer.parseInt(request.getParameter("id")));
-	        	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "+item);
+	        	System.out.println(">>>>> "+item.getDescription());
 	        } catch (Exception e) {}
 	        
 	        return item;

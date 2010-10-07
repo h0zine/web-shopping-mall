@@ -12,7 +12,8 @@
         <prop key="/member/join.oz">userEntryFormController</prop>
         <prop key="/index.oz">indexController</prop>
         <prop key="/admin/index.oz">adminIndexController</prop>
-        <prop key="/admin/member/index.oz">adminMemberController</prop>
+
+		<!-- admin board -->
         <prop key="/admin/board/index.oz">adminBoardController</prop>
 
         <!-- admin category -->
@@ -60,11 +61,10 @@
   <bean id="adminIndexController" class="store.web.controller.admin.AdminIndexController">
   </bean>
   
-  <bean id="adminMemberController" class="store.web.controller.admin.member.AdminMemberController">
-  </bean>
-
+  <!-- Board controller start -->
   <bean id="adminBoardController" class="store.web.controller.admin.board.AdminBoardController">
   </bean>
+  <!-- Board controller end -->
 
   <!-- Category controller start -->
   <bean id="adminCategoryController" class="store.web.controller.admin.category.AdminCategoryController">
