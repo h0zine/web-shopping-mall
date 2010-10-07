@@ -316,10 +316,52 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 	
 	private class RmUser implements RowMapper
 	{
-
 		public Object mapRow(ResultSet rs, int rownum) throws SQLException {
-			// TODO Auto-generated method stub
-			return null;
+			User user = new User();
+
+			user.setId(rs.getString("id"));
+			user.setPasswd(rs.getString("passwd"));
+			user.setName(rs.getString("name"));
+			user.setPhoto(rs.getString("photo"));
+			user.setIcon(rs.getString("icon"));
+			user.setNick(rs.getString("nick")); 
+			user.setResno(rs.getString("resno")); 
+			user.setTphone(rs.getString("tphone")); 
+			user.setHphone(rs.getString("hphone")); 
+			user.setComtel(rs.getString("comtel"));
+			user.setHomepage(rs.getString("homepage"));
+			user.setPost(rs.getString("post"));
+			user.setAddress1(rs.getString("address1"));
+			user.setAddress2(rs.getString("address2"));
+			user.setReemail(rs.getString("reemail"));
+			user.setResms(rs.getString("resms"));
+			user.setBirthday(rs.getString("birthday"));
+			user.setBgubun(rs.getString("bgubun"));
+			user.setMarriage(rs.getString("marriage"));
+			user.setMemorial(rs.getString("memorial"));
+			user.setScholarship(rs.getString("scholarship"));
+			user.setJob(rs.getString("job"));
+			user.setIncome(rs.getString("income"));
+			user.setCar(rs.getString("car"));
+			user.setHobby(rs.getString("hobby"));
+			user.setConsph(rs.getString("consph"));
+			user.setConprd(rs.getString("conprd"));
+			user.setLevel(rs.getString("level"));
+			user.setRecom(rs.getString("recome"));
+			user.setVisit(rs.getString("visit"));
+			user.setVisitTime(new java.util.Date(rs.getDate("visit_time").getTime()));
+			user.setIntro(rs.getString("intro"));
+			user.setMemo(rs.getString("memo"));
+			user.setAddinfo1(rs.getString("addinfo1"));
+			user.setAddinfo2(rs.getString("addinfo2"));
+			user.setAddinfo3(rs.getString("addinfo3"));
+			user.setAddinfo4(rs.getString("addinfo4"));
+			user.setAddinfo5(rs.getString("addinfo5"));
+			user.setWdate(new java.util.Date(rs.getDate("wdate").getTime()));
+			user.setContury(rs.getString("country"));
+			user.setEmail(rs.getString("email"));
+			
+			return user;			
 		}
 		
 	}
@@ -345,18 +387,18 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 	}
 	
 	public List getAllList() {
-		return (List) getJdbcTemplate().query(UserDaoImpl.SELECT_ALL, rowMapper)
+		return (List) getJdbcTemplate().query(UserDaoImpl.SELECT_ALL, new RmUser());
 	}
 	
 	public List getPageList(int page) {
-		
+		return (List) getJdbcTemplate().query(UserDaoImpl.SELECT_PAGE, new PstmtSetterSelectPage(page), new RmUser());
 	}
 	
 	public void updateById(User user) {
-		
+		getJdbcTemplate().update(UserDaoImpl.UPDATE_BY_ID, new PstmtSetterUpdateById(user));
 	}
 	
 	public void updateByEmail(User user) {
-		
+		getJdbcTemplate().update(UserDaoImpl.UPDATE_BY_EMAIL, new PstmtSetterUpdateByEmail(user));
 	}
 }
