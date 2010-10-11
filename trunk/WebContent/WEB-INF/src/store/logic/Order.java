@@ -7,11 +7,13 @@ import java.util.ArrayList;
 public class Order {
 	private int orderId;
 	private int invoiceId;
+	private int itemId;
 	private String productName;
 	private int amount;
 	private String price;
 	private String status;   // waiting pay, payed, preparing, waiting pickup, sent, returned, withdrawn
 	private Date createDate;
+	private Date lastUpdate;
 	private List options;
 	
 	
@@ -29,6 +31,12 @@ public class Order {
 	}
 	public void setInvoiceId(int invoiceId) {
 		this.invoiceId = invoiceId;
+	}
+	public int getItemId() {
+		return itemId;
+	}
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 	public String getProductName() {
 		return productName;
@@ -59,6 +67,12 @@ public class Order {
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 	public List getOptions() {
 		return this.options;

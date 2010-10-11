@@ -8,6 +8,8 @@ public class ShopImpl implements Shop {
 	private UserCatalog userCatalog;
 	private CategoryCatalog categoryCatalog;
 	private EventCatalog eventCatalog;
+	private InvoiceCatalog invoiceCatalog;
+	private OrderCatalog orderCatalog;
 	
 	
 	// item
@@ -116,6 +118,33 @@ public class ShopImpl implements Shop {
 		this.eventCatalog.update(event);
 	}
 	
+	
+	// Invoice
+	public void setInvoiceCatalog(InvoiceCatalog invoiceCatalog) {
+		this.invoiceCatalog = invoiceCatalog;
+	}
+	
+	public List getInvoicePage(int pagenum) {
+		return this.invoiceCatalog.getPage(pagenum);
+	}
+	
+	public Invoice getInvoice(int invoiceId) {
+		return this.invoiceCatalog.getInvoice(invoiceId);
+	}
+	public void updateInvoice(Invoice invoice) {
+		this.invoiceCatalog.updateInvoice(invoice);
+	}
+	
+	// Order
+	
+	public void setOrderCatalog(OrderCatalog orderCatalog) {
+		this.orderCatalog = orderCatalog;
+	}
+	
+	public List getOrderByInvoiceId(int invoiceId) {
+		System.out.println(">>>>>>>>>>>>>>> "+orderCatalog);
+		return this.orderCatalog.findAll(invoiceId);
+	}
 
 	// user 
 	public void setUserCatalog(UserCatalog userCatalog)
