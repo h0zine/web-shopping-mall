@@ -7,4 +7,6 @@ public class WebConstants {
 	public static final String EVENT_LIST = "EVENT_LIST";
 	public static final String ITEM_LIST = "ITEM_LIST";
 	public static final String ITEM_PAGE = "ITEM_PAGE";
+	public static final String INVOICE_LIST = "INVOICE_LIST";
+	public static final String INVOICE_DETAIL = "INVOICE_DETAIL";
 }

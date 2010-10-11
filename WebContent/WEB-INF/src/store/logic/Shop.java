@@ -29,5 +29,11 @@ public interface Shop
 	Event getEvent(int id);
 	void updateEvent(Event event);
 	
+	// Invoice related method
+	List getInvoicePage(int pagenum);
+	Invoice getInvoice(int invoiceId);
+	void updateInvoice(Invoice invoice);
+	List getOrderByInvoiceId(int invoiceId);
+	
 	void entryUser(User user);
 }

@@ -39,6 +39,12 @@
         <prop key="/admin/member/addItem.oz">adminAddMemberController</prop>
         <prop key="/admin/member/delItem.oz">adminDelMemberController</prop>
         <prop key="/admin/member/edtItem.oz">adminEditMemberController</prop>
+        
+        <!-- admin invoice -->
+		<prop key="/admin/invoice/index.oz">adminInvoiceListController</prop>
+        <prop key="/admin/invoice/invoiceDetail.oz">adminInvoiceDetailController</prop>
+        <prop key="/admin/invoice/orderDetail.oz">adminOrderDetailController</prop>
+        
       </props>
     </property>
   </bean>
@@ -170,8 +176,26 @@
     <property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
   <!-- Admin member controller end -->
+
+  <!-- Admin Invoice controller start -->  
+  <bean id="adminInvoiceListController" class="store.web.controller.admin.invoice.AdminInvoiceListController">
+    <property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
   
-    
+  <bean id="adminInvoiceDetailController" class="store.web.controller.admin.invoice.AdminInvoiceDetailController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>invoice</value></property>
+  	<property name="commandClass"><value>store.logic.Invoice</value></property>
+  	<property name="formView"><value>admin.invoiceDetail</value></property>
+  	<property name="successView"><value>admin.invoiceUpdated</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  
+  <bean id="adminOrderDetailController" class="store.web.controller.admin.invoice.AdminOrderDetailController">
+    <property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  <!-- Admin Invoice controller end -->  
+
   <!-- ViewResolver -->
   <bean id="resourceBundleViewResolver"
         class="org.springframework.web.servlet.view.ResourceBundleViewResolver">

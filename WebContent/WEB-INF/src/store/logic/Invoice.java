@@ -12,14 +12,22 @@ public class Invoice {
 	private Date lastUpdate;
 	private String deliveryCost;
 	private String productCost;
+
 	private String buyerId;
-	private String postcode;
+	private String buyerName;
+	private String buyerEmail;
+	private String buyerPhone;
+
+	private String receiverName;
+	private String receiverEmail;
+	private String receiverPhone;
+
 	private String address1;
 	private String address2;
+	private String postcode;
 	private String state;
 	private String country;
-	private String receiverName;
-	private String buyerName;
+
 	private String paymethod;
 	private String status;   // waiting pay, payed, preparing, waiting pickup, sent, returned, withdrawn
 	private String memo;
@@ -44,6 +52,10 @@ public class Invoice {
 	
 	public void addOrder(Order order) {
 		orders.add(order);
+	}
+	
+	public void setOrder(List orders) {
+		this.orders = orders;
 	}
 	
 	public int getId() {
@@ -141,5 +153,37 @@ public class Invoice {
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public String getBuyerEmail() {
+		return buyerEmail;
+	}
+
+	public void setBuyerEmail(String buyerEmail) {
+		this.buyerEmail = buyerEmail;
+	}
+
+	public String getBuyerPhone() {
+		return buyerPhone;
+	}
+
+	public void setBuyerPhone(String buyerPhone) {
+		this.buyerPhone = buyerPhone;
+	}
+
+	public String getReceiverEmail() {
+		return receiverEmail;
+	}
+
+	public void setReceiverEmail(String receiverEmail) {
+		this.receiverEmail = receiverEmail;
+	}
+
+	public String getReceiverPhone() {
+		return receiverPhone;
+	}
+
+	public void setReceiverPhone(String receiverPhone) {
+		this.receiverPhone = receiverPhone;
 	}
 }

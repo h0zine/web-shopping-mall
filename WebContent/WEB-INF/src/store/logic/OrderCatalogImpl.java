@@ -9,6 +9,14 @@ public class OrderCatalogImpl implements OrderCatalog
 	OrderDao orderDao;
 	OptionDao optDao;
 	
+	public void setOrderDao(OrderDao orderDao) {
+		this.orderDao = orderDao;
+	}
+	
+	public void setOptDao(OptionDao optDao) {
+		this.optDao = optDao;
+	}
+	
 	public List findAll() {
 		return orderDao.selectAll();
 	}

@@ -41,7 +41,6 @@ public class AdminEditItemController extends SimpleFormController
 	        
 	        try {
 	        	item = shopService.getItem(Integer.parseInt(request.getParameter("id")));
-	        	System.out.println(">>>>> "+item.getDescription());
 	        } catch (Exception e) {}
 	        
 	        return item;

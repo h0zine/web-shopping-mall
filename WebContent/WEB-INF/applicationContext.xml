@@ -17,7 +17,7 @@
       <value>root</value>
     </property>
     <property name="password">
-      <value></value>
+      <value>qwer1234</value>
     </property>
   </bean>
   
@@ -38,6 +38,20 @@
 
   <!-- UserDao -->
   <bean id="userDao" class="store.dao.UserDaoImpl">
+    <property name="dataSource">
+      <ref bean="dataSource"/>
+    </property>
+  </bean>
+
+  <!-- InvoiceDao -->
+  <bean id="invoiceDao" class="store.dao.InvoiceDaoImpl">
+    <property name="dataSource">
+      <ref bean="dataSource"/>
+    </property>
+  </bean>
+
+  <!-- OrderDao -->
+  <bean id="orderDao" class="store.dao.OrderDaoImpl">
     <property name="dataSource">
       <ref bean="dataSource"/>
     </property>
@@ -78,6 +92,20 @@
     </property>
   </bean>
 
+  <!-- InvoiceCatalog -->
+  <bean id="invoiceCatalog" class="store.logic.InvoiceCatalogImpl">
+    <property name="invoiceDao">
+      <ref bean="invoiceDao"/>
+    </property>
+  </bean>
+
+  <!-- OrderCatalog -->
+  <bean id="orderCatalog" class="store.logic.OrderCatalogImpl">
+    <property name="orderDao">
+      <ref bean="orderDao"/>
+    </property>
+  </bean>
+
   <!-- Shop -->
   <bean id="shopSerivce" class="store.logic.ShopImpl">
     <property name="itemCatalog">
@@ -91,6 +119,12 @@
     </property>
     <property name="eventCatalog">
       <ref bean="eventCatalog"/>
+    </property>
+    <property name="invoiceCatalog">
+      <ref bean="invoiceCatalog"/>
+    </property>
+    <property name="orderCatalog">
+      <ref bean="orderCatalog"/>
     </property>
   </bean>
   
