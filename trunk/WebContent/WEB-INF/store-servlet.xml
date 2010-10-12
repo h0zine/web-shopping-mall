@@ -192,7 +192,12 @@
   </bean>
   
   <bean id="adminOrderDetailController" class="store.web.controller.admin.invoice.AdminOrderDetailController">
-    <property name="shopService"><ref bean="shopSerivce"/></property>
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>order</value></property>
+  	<property name="commandClass"><value>store.logic.Order</value></property>
+  	<property name="formView"><value>admin.orderDetail</value></property>
+  	<property name="successView"><value>admin.orderUpdated</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
   <!-- Admin Invoice controller end -->  
 
