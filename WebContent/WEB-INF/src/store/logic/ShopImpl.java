@@ -142,8 +142,15 @@ public class ShopImpl implements Shop {
 	}
 	
 	public List getOrderByInvoiceId(int invoiceId) {
-		System.out.println(">>>>>>>>>>>>>>> "+orderCatalog);
 		return this.orderCatalog.findAll(invoiceId);
+	}
+	
+	public Order getOrder(int orderId) {
+		return this.orderCatalog.find(orderId);
+	}
+	
+	public void updateOrder(Order order) {
+		this.orderCatalog.update(order);
 	}
 
 	// user 

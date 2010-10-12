@@ -58,6 +58,10 @@ public class Invoice {
 		this.orders = orders;
 	}
 	
+	public List getOrder() {
+		return this.orders;
+	}
+	
 	public int getId() {
 		return id;
 	}

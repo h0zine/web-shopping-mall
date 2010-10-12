@@ -2,7 +2,6 @@ package store.web.controller.admin.invoice;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Date;
 
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import store.logic.Shop;
 import store.logic.Invoice;
-import store.web.WebConstants;
 
 public class AdminInvoiceDetailController extends SimpleFormController 
 {
@@ -53,7 +51,6 @@ public class AdminInvoiceDetailController extends SimpleFormController
 			
 			Invoice invoice = shopService.getInvoice(invoiceId);
 			invoice.setOrder(shopService.getOrderByInvoiceId(invoiceId));
-	
 			return invoice;
 	    }
 	    else {
