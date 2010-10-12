@@ -247,24 +247,27 @@
 <table>
 	<tr>
 		<td>주문번호</td>
-		<td>주문일시</td>
+		<td>제품명</td>
+		<td>수량</td>
+		<td>가격</td>
+		<td>처리상태</td>
+		<td>주문일</td>
 		<td>업데이트</td>
-		<td>주문자</td>
-		<td>수신자</td>
-		<td>상태</td>
-		<td>주문일시</td></tr>
-	
-	<c:forEach items="${ORDER_LIST}" var="order">
-	<tr>
-		<td><a href="orderDetail.oz?id=<c:out value="${invoice.id }"/>"><c:out value="${invoice.id }"/></a></td>
-		<td><c:out value="${invoice.issueDate }"/></td>
-		<td><c:out value="${invoice.lastUpdate }"/></td>
-		<td><c:out value="${invoice.buyerName }"/></td>
-		<td><c:out value="${invoice.receiverName }"/></td>
-		<td><c:out value="${invoice.status }"/></td>
-		<td><c:out value="${invoice.lastUpdate }"/></td>
 	</tr>
-</c:forEach>
+	
+	<spring:bind path="invoice.order">
+	<c:forEach items="${status.value }" var="odr">
+	<tr>
+		<td><a href="orderDetail.oz?id=<c:out value="${odr.orderId }"/>"><c:out value="${odr.orderId }"/></a></td>
+		<td><a href="itemDetail.oz?id=<c:out value="${odr.itemId }"/>"><c:out value="${odr.productName }"/></a></td>
+		<td><c:out value="${odr.amount }"/></td>
+		<td><c:out value="${odr.price }"/></td>
+		<td><c:out value="${odr.status }"/></td>
+		<td><c:out value="${odr.createDate }"/></td>
+		<td><c:out value="${odr.lastUpdate }"/></td>
+	</tr>
+	</c:forEach>
+	</spring:bind>
 </table>
 
 </body>
