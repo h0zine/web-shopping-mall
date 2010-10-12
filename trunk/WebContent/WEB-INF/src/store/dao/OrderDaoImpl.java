@@ -64,6 +64,7 @@ public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao
 			
 			order.setAmount(rs.getInt("amount"));
 			order.setCreateDate(new java.sql.Date(rs.getDate("create_date").getTime()));
+			order.setLastUpdate(new java.sql.Date(rs.getDate("last_update").getTime()));
 			order.setInvoiceId(rs.getInt("invoice_id"));
 			order.setOrderId(rs.getInt("order_id"));
 			order.setPrice(rs.getString("price"));

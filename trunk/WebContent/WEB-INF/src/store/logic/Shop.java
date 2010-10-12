@@ -33,7 +33,11 @@ public interface Shop
 	List getInvoicePage(int pagenum);
 	Invoice getInvoice(int invoiceId);
 	void updateInvoice(Invoice invoice);
+	
+	// Order method
 	List getOrderByInvoiceId(int invoiceId);
+	Order getOrder(int orderId);
+	void updateOrder(Order order);
 	
 	void entryUser(User user);
 }
