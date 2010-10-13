@@ -21,6 +21,22 @@
     </property>
   </bean>
   
+  <bean id="dsOzfishing"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName">
+      <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property name="url">
+      <value>jdbc:mysql://localhost/ozfishing?useUnicode=true&amp;characterEncoding=euckr</value>
+    </property>
+    <property name="username">
+      <value>root</value>
+    </property>
+    <property name="password">
+      <value>qwer1234</value>
+    </property>
+  </bean>
+
   <!-- ItemCatalog -->
   <bean id="itemCatalog" class="store.logic.ItemCatalogImpl">
     <property name="itemDao">
@@ -39,7 +55,7 @@
   <!-- UserDao -->
   <bean id="userDao" class="store.dao.UserDaoImpl">
     <property name="dataSource">
-      <ref bean="dataSource"/>
+      <ref bean="dsOzfishing"/>
     </property>
   </bean>
 
@@ -78,6 +94,13 @@
     </property>
   </bean>
 
+  <!-- Feedback Dao -->
+  <bean id="feedbackDao" class="store.dao.FeedbackDaoImpl">
+    <property name="dataSource">
+      <ref bean="dataSource"/>
+    </property>
+  </bean>
+
   <!-- CategoryCatalog -->
   <bean id="categoryCatalog" class="store.logic.CategoryCatalogImpl">
     <property name="categoryDao">
@@ -105,7 +128,14 @@
       <ref bean="orderDao"/>
     </property>
   </bean>
-
+  
+  <!-- FeedbackCatalog -->
+  <bean id="feedbackCatalog" class="store.logic.FeedbackCatalogImpl">
+    <property name="feedbackDao">
+      <ref bean="feedbackDao"/>
+    </property>
+  </bean>
+  
   <!-- Shop -->
   <bean id="shopSerivce" class="store.logic.ShopImpl">
     <property name="itemCatalog">
@@ -125,6 +155,9 @@
     </property>
     <property name="orderCatalog">
       <ref bean="orderCatalog"/>
+    </property>
+    <property name="feedbackCatalog">
+      <ref bean="feedbackCatalog"/>
     </property>
   </bean>
   

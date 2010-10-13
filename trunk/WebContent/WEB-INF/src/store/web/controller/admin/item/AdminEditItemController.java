@@ -56,7 +56,7 @@ public class AdminEditItemController extends SimpleFormController
 
 		try {
 			this.shopService.updateItem(item);
-			
+			System.out.println(">>>>>>>>>>>>>>>>>>>> move to success view");
 			ModelAndView modelAndView = new ModelAndView(getSuccessView());
 			return modelAndView;
 		}

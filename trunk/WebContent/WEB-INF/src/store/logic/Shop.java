@@ -39,5 +39,13 @@ public interface Shop
 	Order getOrder(int orderId);
 	void updateOrder(Order order);
 	
+	// Feedback methods
+	List getFeedbackPage(int page);
+	void addFeedback(Feedback feedback);
+	void deleteFeedback(int feedbackId);
+	List getItemFeedback(int itemId);
+	
+	// User method
 	void entryUser(User user);
+	List getUserListPage(int page);
 }

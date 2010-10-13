@@ -1,8 +1,7 @@
 package store.logic;
 
 import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
+
 
 public class Order {
 	private int orderId;
@@ -14,11 +13,9 @@ public class Order {
 	private String status;   // waiting pay, payed, preparing, waiting pickup, sent, returned, withdrawn
 	private Date createDate;
 	private Date lastUpdate;
-	private List options;
-	
 	
 	public Order() {
-		options = new ArrayList();
+		createDate = new java.util.Date();
 	}
 	public int getOrderId() {
 		return orderId;
@@ -69,21 +66,9 @@ public class Order {
 		this.createDate = createDate;
 	}
 	public Date getLastUpdate() {
-		return lastUpdate;
+		return this.lastUpdate;
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
-	}
-	public List getOptions() {
-		return this.options;
-	}
-	public int numOptions() {
-		return this.options.size();
-	}
-	public void remove(int i) {
-		this.options.remove(i);
-	}
-	public void addOption(Option option) {
-		this.options.add(option);
 	}
 }

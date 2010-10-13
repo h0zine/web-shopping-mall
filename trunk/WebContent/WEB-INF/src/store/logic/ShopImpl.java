@@ -10,7 +10,7 @@ public class ShopImpl implements Shop {
 	private EventCatalog eventCatalog;
 	private InvoiceCatalog invoiceCatalog;
 	private OrderCatalog orderCatalog;
-	
+	private FeedbackCatalog feedbackCatalog;
 	
 	// item
 	public void setItemCatalog(ItemCatalog itemCatalog)
@@ -162,5 +162,31 @@ public class ShopImpl implements Shop {
 	public void entryUser(User user) 
 	{
 		this.userCatalog.entryUser(user);
+	}
+	
+	public List getUserListPage(int page) {
+		return this.userCatalog.getListPage(page);
+	}
+
+	// feedback
+	
+	public void setFeedbackCatalog(FeedbackCatalog feedbackCatalog) {
+		this.feedbackCatalog = feedbackCatalog;
+	}
+	
+	public List getFeedbackPage(int page) {
+		return this.feedbackCatalog.getPage(page);
+	}
+	
+	public void addFeedback(Feedback feedback) {
+		this.feedbackCatalog.add(feedback);
+	}
+	
+	public void deleteFeedback(int feedbackId) {
+		this.feedbackCatalog.delete(feedbackId);
+	}
+	
+	public List getItemFeedback(int itemId) {
+		return this.feedbackCatalog.getItemFeedback(itemId);
 	}
 }

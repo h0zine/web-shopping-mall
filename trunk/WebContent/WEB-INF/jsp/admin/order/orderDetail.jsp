@@ -5,7 +5,7 @@
 <title><spring:message code="store.name"/> - 판매관리</title>
 </head>
 <body>
-<form  name="frm" action="invoiceDetail.oz" method="post">
+<form name="frm" action="orderDetail.oz" method="post">
 <font color="red"><c:out value="${loginErrorMsg }"/></font>
 <table>
 	<tr>
@@ -23,7 +23,7 @@
 	<tr>
 		<td>주문일</td>
 		<td>
-			<spring:bind path="order.issueDate">
+			<spring:bind path="order.createDate">
 			<input type="text"
 				name="<c:out value="${status.expression}"/>"
 				value="<c:out value="${status.value}"/>" maxlength="20">
@@ -35,7 +35,7 @@
 	<tr>
 		<td>업데이트일</td>
 		<td>
-			<spring:bind path="invoice.lastUpdate">
+			<spring:bind path="order.lastUpdate">
 			<input type="text"
 				name="<c:out value="${status.expression}"/>"
 				value="<c:out value="${status.value}"/>" maxlength="20">
@@ -45,9 +45,9 @@
 	</tr>
 
 	<tr>
-		<td>물품비용</td>
+		<td>물품명</td>
 		<td>
-			<spring:bind path="invoice.productCost">
+			<spring:bind path="order.productName">
 			<input type="text"
 				name="<c:out value="${status.expression}"/>"
 				value="<c:out value="${status.value}"/>" maxlength="20">
@@ -57,9 +57,9 @@
 	</tr>
 
 	<tr>
-		<td>배송비용</td>
+		<td>물품가격</td>
 		<td>
-			<spring:bind path="invoice.deliveryCost">
+			<spring:bind path="order.price">
 			<input type="text"
 				name="<c:out value="${status.expression}"/>"
 				value="<c:out value="${status.value}"/>" maxlength="20">
@@ -69,9 +69,9 @@
 	</tr>
 
 	<tr>
-		<td>지불방법</td>
+		<td>물품수량</td>
 		<td>
-			<spring:bind path="invoice.paymethod">
+			<spring:bind path="order.amount">
 			<input type="text"
 				name="<c:out value="${status.expression}"/>"
 				value="<c:out value="${status.value}"/>" maxlength="20">
@@ -81,9 +81,9 @@
 	</tr>
 
 	<tr>
-		<td>처리상태</td>
+		<td>상태</td>
 		<td>
-			<spring:bind path="invoice.status">
+			<spring:bind path="order.status">
 			<input type="text"
 				name="<c:out value="${status.expression}"/>"
 				value="<c:out value="${status.value}"/>" maxlength="20">
@@ -91,157 +91,17 @@
 			</spring:bind>
 		</td>
 	</tr>
-
-	<tr>
-		<td>메모</td>
-		<td>
-			<spring:bind path="invoice.memo">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>구매자아이디</td>
-		<td>
-			<spring:bind path="invoice.buyerId">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>구매자이름</td>
-		<td>
-			<spring:bind path="invoice.buyerName">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>구매자이메일</td>
-		<td>
-			<spring:bind path="invoice.buyerEmail">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>구매자전화번호</td>
-		<td>
-			<spring:bind path="invoice.buyerPhone">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>수취인이름</td>
-		<td>
-			<spring:bind path="invoice.receiverName">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>수취인이메일</td>
-		<td>
-			<spring:bind path="invoice.receiverEmail">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>수취인전화번호</td>
-		<td>
-			<spring:bind path="invoice.receiverPhone">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>배송지주소 1</td>
-		<td>
-			<spring:bind path="invoice.address1">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>배송지주소 2</td>
-		<td>
-			<spring:bind path="invoice.address2">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>우편번호</td>
-		<td>
-			<spring:bind path="invoice.postcode">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
-	<tr>
-		<td>주</td>
-		<td>
-			<spring:bind path="invoice.state">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-
+	
 	<tr>
 		<td colspan="2" align="right">
-			<input type="submit" value="업데이트">
+			<input type="submit" value="등록">
 		</td>
 	</tr>
 </table>
+
+<spring:bind path="order.invoiceId">
+	<input type="hidden" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>" >
+</spring:bind>
 </form>
 
 </body>
