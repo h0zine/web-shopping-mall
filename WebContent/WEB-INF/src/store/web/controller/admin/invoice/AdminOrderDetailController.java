@@ -3,7 +3,6 @@ package store.web.controller.admin.invoice;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import store.logic.Order;
 import store.logic.Shop;
-import store.web.WebConstants;
 
 public class AdminOrderDetailController extends SimpleFormController 
 {
@@ -64,13 +62,14 @@ public class AdminOrderDetailController extends SimpleFormController
 	{
 		Order order = (Order) cmd;
 		order.setLastUpdate(new java.util.Date());
-		
 		try {
 			shopService.updateOrder(order);
 			ModelAndView modelAndView = new ModelAndView(getSuccessView());
+			modelAndView.addObject("invoice_id", new Integer(order.getInvoiceId()));
 			return modelAndView;
 		}
 		catch (Exception e) {
+			e.printStackTrace(System.err);
 			exception.reject("error.updatefailed");
 			return showForm(req, res, exception);
 		}

@@ -5,8 +5,7 @@
 <title><spring:message code="store.name"/> - 상품 수정</title>
 </head>
 <body>
-<a href="">test</a>
-<form  name="frm" action="addItem.oz" method="post">
+<form  name="frm" action="edtItem.oz" method="post">
 <font color="red"><c:out value="${loginErrorMsg }"/></font>
 <table>
 	<tr>
@@ -146,6 +145,15 @@
 		</td>
 	</tr>
 </table>
+	<spring:bind path="item.visit">
+		<input type="hidden" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>">
+	</spring:bind>
+	<spring:bind path="item.sold">
+		<input type="hidden" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>">
+	</spring:bind>
+	<spring:bind path="item.lastSold">
+		<input type="hidden" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>">
+	</spring:bind>
 </form>
 </body>
 </html>

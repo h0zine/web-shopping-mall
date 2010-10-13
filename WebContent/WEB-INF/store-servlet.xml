@@ -45,6 +45,10 @@
         <prop key="/admin/invoice/invoiceDetail.oz">adminInvoiceDetailController</prop>
         <prop key="/admin/invoice/orderDetail.oz">adminOrderDetailController</prop>
         
+        <!-- admin feedback -->
+		<prop key="/admin/feedback/index.oz">adminFeedBackListController</prop>
+		<prop key="/admin/feedback/delete.oz">adminFeedBackDeleteController</prop>
+
       </props>
     </property>
   </bean>
@@ -200,6 +204,16 @@
   	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
   <!-- Admin Invoice controller end -->  
+
+  <!-- Admin feedback controller start -->
+  <bean id="adminFeedBackListController" class="store.web.controller.admin.feedback.AdminFeedbackListController">
+    <property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  
+  <bean id="adminFeedBackDeleteController" class="store.web.controller.admin.feedback.AdminFeedbackDeleteController">
+    <property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  <!-- Admin feedback controller end -->
 
   <!-- ViewResolver -->
   <bean id="resourceBundleViewResolver"

@@ -31,16 +31,13 @@ public class OrderCatalogImpl implements OrderCatalog
 	
 	public void add(Order order) {
 		orderDao.insert(order);
-		optDao.insert(order.getOptions());
 	}
 	
 	public void remove(int orderId) {
-		optDao.delete(find(orderId).getOptions());
 		orderDao.delete(orderId);
 	}
 	
 	public void update(Order order) {
 		orderDao.update(order);
-		optDao.update(order.getOptions());
 	}
 }

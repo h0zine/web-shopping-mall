@@ -23,29 +23,29 @@ public class User
 	String reemail;  // receive broadcasting email. 'Y' or 'N' only
 	String resms; 	 // receive boradcasting sms. 'Y' or 'N' only
 	String birthday;
-	String bgubun;	 // 양력, 음력 구분.  '양력' or '음력' only
-	String marriage; // 기혼/미혼 
-	String memorial; // 기념일
-	String scholarship; // 학력
-	String job;      // 직업
-	String income;	 // 수입
-	String car;		 // 자동차 소유여부
-	String hobby;    // 취미
-	String consph;   // ?
-	String conprd;   // ?
-	String level;    // 회원 등급
-	String recom;    // ?
-	String visit;    // 방문횟수
-	Date   visit_time; // 방문일
-	String intro;    // 소개인사
+	String bgubun;	 // 
+	String marriage; //  
+	String memorial; // 
+	String scholarship; // 
+	String job;      // 
+	String income;	 // 
+	String car;		 // 
+	String hobby;    // 
+	String consph;   // 
+	String conprd;   // 
+	String level;    //
+	String recom;    //
+	String visit;    // 
+	Date   visit_time; //
+	String intro;    // 
 	String memo;     //memo
-	String addinfo1; // 추가정보 1
-	String addinfo2; // 추가정보 2
-	String addinfo3; // 추가정보 3
-	String addinfo4; // 추가정보 4
-	String addinfo5; // 추가정보 4
-	Date   wdate;    // ??
-	String contury;  // 국가
+	String addinfo1; // 
+	String addinfo2; //
+	String addinfo3; // 
+	String addinfo4; // 
+	String addinfo5; // 
+	Date   wdate;    //
+	String contury;  // 
 	
 	
 	public int getIdx() {

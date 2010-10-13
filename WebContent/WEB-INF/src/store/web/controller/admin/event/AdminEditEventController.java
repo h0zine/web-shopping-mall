@@ -50,8 +50,7 @@ public class AdminEditEventController extends SimpleFormController
 		model.put(WebConstants.EVENT_LIST, shopService.getAllEvent());
 		
 		// Have to return ModelAndView object... don't forget this!
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin.event");
+		ModelAndView modelAndView = new ModelAndView(getSuccessView());
 		modelAndView.addAllObjects(model);
 		
 		return modelAndView;

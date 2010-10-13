@@ -33,7 +33,6 @@ public class AdminAddCategoryController extends SimpleFormController
 			this.shopService.entryCategory(category);
 			
 			ModelAndView modelAndView = new ModelAndView(getSuccessView());
-			modelAndView.addObject(WebConstants.CATEGORY_LIST, category);
 			return modelAndView;
 		}
 		catch (DataIntegrityViolationException e) 
