@@ -48,4 +48,6 @@ public interface Shop
 	// User method
 	void entryUser(User user);
 	List getUserListPage(int page);
+	User getUserById(String id);
+	void updateUser(User user);
 }

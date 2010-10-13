@@ -167,7 +167,16 @@ public class ShopImpl implements Shop {
 	public List getUserListPage(int page) {
 		return this.userCatalog.getListPage(page);
 	}
+	
+	public User getUserById(String id) {
+		return this.userCatalog.getUserById(id);
+	}
 
+	public void updateUser(User user) {
+		this.userCatalog.updateUser(user);
+	}
+	
+	
 	// feedback
 	
 	public void setFeedbackCatalog(FeedbackCatalog feedbackCatalog) {
