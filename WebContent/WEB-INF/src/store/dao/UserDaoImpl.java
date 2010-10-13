@@ -292,7 +292,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 				user.setConsph(rs.getString("consph"));
 				user.setConprd(rs.getString("conprd"));
 				user.setLevel(rs.getString("level"));
-				user.setRecom(rs.getString("recome"));
+				user.setRecom(rs.getString("recom"));
 				user.setVisit(rs.getString("visit"));
 				user.setVisitTime(new java.util.Date(rs.getDate("visit_time").getTime()));
 				user.setIntro(rs.getString("intro"));
@@ -303,7 +303,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 				user.setAddinfo4(rs.getString("addinfo4"));
 				user.setAddinfo5(rs.getString("addinfo5"));
 				user.setWdate(new java.util.Date(rs.getDate("wdate").getTime()));
-				user.setContury(rs.getString("country"));
+				user.setContury(rs.getString("contury"));
 				user.setEmail(rs.getString("email"));
 				
 				return user;
@@ -347,7 +347,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 			user.setConsph(rs.getString("consph"));
 			user.setConprd(rs.getString("conprd"));
 			user.setLevel(rs.getString("level"));
-			user.setRecom(rs.getString("recome"));
+			user.setRecom(rs.getString("recom"));
 			user.setVisit(rs.getString("visit"));
 			user.setVisitTime(new java.util.Date(rs.getDate("visit_time").getTime()));
 			user.setIntro(rs.getString("intro"));
@@ -358,7 +358,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 			user.setAddinfo4(rs.getString("addinfo4"));
 			user.setAddinfo5(rs.getString("addinfo5"));
 			user.setWdate(new java.util.Date(rs.getDate("wdate").getTime()));
-			user.setContury(rs.getString("country"));
+			user.setContury(rs.getString("contury"));
 			user.setEmail(rs.getString("email"));
 			
 			return user;			

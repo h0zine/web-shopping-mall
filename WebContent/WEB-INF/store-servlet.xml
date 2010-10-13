@@ -36,9 +36,7 @@
 
 		<!-- admin member -->
 		<prop key="/admin/member/index.oz">adminListMemberController</prop>
-        <prop key="/admin/member/addItem.oz">adminAddMemberController</prop>
-        <prop key="/admin/member/delItem.oz">adminDelMemberController</prop>
-        <prop key="/admin/member/edtItem.oz">adminEditMemberController</prop>
+        <prop key="/admin/member/detail.oz">adminEditMemberController</prop>
         
         <!-- admin invoice -->
 		<prop key="/admin/invoice/index.oz">adminInvoiceListController</prop>
@@ -168,16 +166,13 @@
     <property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
   
-  <bean id="adminAddMemberController" class="store.web.controller.admin.member.AdminAddMemberController">
-    <property name="shopService"><ref bean="shopSerivce"/></property>
-  </bean>
-  
-  <bean id="adminDelMemberController" class="store.web.controller.admin.member.AdminDelMemberController">
-    <property name="shopService"><ref bean="shopSerivce"/></property>
-  </bean>
-  
   <bean id="adminEditMemberController" class="store.web.controller.admin.member.AdminEditMemberController">
-    <property name="shopService"><ref bean="shopSerivce"/></property>
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>user</value></property>
+  	<property name="commandClass"><value>store.logic.User</value></property>
+  	<property name="formView"><value>admin.userDetail</value></property>
+  	<property name="successView"><value>admin.userUpdated</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
   <!-- Admin member controller end -->
 

@@ -18,4 +18,12 @@ public class UserCatalogImpl implements UserCatalog {
 	public List getListPage(int page) {
 		return this.userDao.getPageList(page);
 	}
+
+	public User getUserById(String id) {
+		return this.userDao.getById(id);
+	}
+
+	public void updateUser(User user) {
+		this.userDao.updateById(user);
+	}
 }

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import store.logic.Shop;
-import store.logic.Item;
+import store.logic.User;
 
 public class AdminEditMemberController extends SimpleFormController 
 {
@@ -24,14 +24,13 @@ public class AdminEditMemberController extends SimpleFormController
 	{
 	    if(!isFormSubmission(request)) {
 	    	
-	        Item item = null;
+	        User user = null;
 	        
 	        try {
-	        	item = shopService.getItem(Integer.parseInt(request.getParameter("id")));
-	        	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "+item);
+	        	user = shopService.getUserById(request.getParameter("id"));
 	        } catch (Exception e) {}
 	        
-	        return item;
+	        return user;
 	    }
 	    else {
 	        return super.formBackingObject(request);
@@ -40,10 +39,10 @@ public class AdminEditMemberController extends SimpleFormController
 	
 	protected ModelAndView onSubmit(HttpServletRequest req, HttpServletResponse res, Object cmd, BindException exception) throws Exception
 	{
-		Item item = (Item) cmd;
+		User user = (User) cmd;
 
 		try {
-			this.shopService.updateItem(item);
+			this.shopService.updateUser(user);
 			
 			ModelAndView modelAndView = new ModelAndView(getSuccessView());
 			return modelAndView;

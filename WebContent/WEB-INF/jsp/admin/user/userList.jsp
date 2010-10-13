@@ -2,23 +2,25 @@
 <%@ include file="/WEB-INF/jsp/jsp_header.jsp" %>
 <html>
 <head>
-<title>관리자 메뉴 - 이벤트 관리</title>
+<title>관리자 메뉴 - 회원 관리</title>
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/admin/menu.jsp" %>
 
 <table>
-	<tr><td>이벤트 명</td><td>메뉴</td></tr>
-<c:forEach items="${EVENT_LIST}" var="event">
+	<tr><td>아이디</td><td>이름</td><td>닉네임</td></tr>
+	
+	<c:forEach items="${USER_LIST}" var="user">
 	<tr>
 		<td>
-			<c:out value="${event.eventName }"/></td>
+			<a href="detail.oz?id=<c:out value="${user.id }"/>"><c:out value="${user.id }"/></a></td>
 		<td>
-			[<a href="delEvent.oz?id=<c:out value="${event.eventId }"/>"">-</a>] 
-			[<a href="editEvent.oz?id=<c:out value="${event.eventId }"/>"">=</a>]</td>
+			<c:out value="${user.name }"/></td>
+		<td>
+			<c:out value="${user.nick }"/></td>
 	</tr>
-</c:forEach>
-	<tr><td colspan="2"><a href="addEvent.oz">이벤트 추가</a></td></tr>
+	</c:forEach>
+	
 </table>
 </body>
 </html>
