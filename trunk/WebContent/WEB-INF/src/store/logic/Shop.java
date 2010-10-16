@@ -50,4 +50,12 @@ public interface Shop
 	List getUserListPage(int page);
 	User getUserById(String id);
 	void updateUser(User user);
+	
+	// notice method
+	void addNotice(Notice notice);
+	void deleteNotice(int noticeId);
+	void updateNotice(Notice notice);
+	Notice getNotice(int noticeId);
+	List getAllNotice();
+	
 }

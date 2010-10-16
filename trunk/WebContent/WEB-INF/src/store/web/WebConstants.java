@@ -12,4 +12,5 @@ public class WebConstants {
 	public static final String INVOICE_LIST = "INVOICE_LIST";
 	public static final String INVOICE_DETAIL = "INVOICE_DETAIL";
 	public static final String FEEDBACK_LIST = "FEEDBACK_LIST";
+	public static final String NOTICE_LIST = "NOTICE_LIST";
 }

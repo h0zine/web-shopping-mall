@@ -100,6 +100,13 @@
       <ref bean="dataSource"/>
     </property>
   </bean>
+  
+  <!-- Notice Dao -->
+  <bean id = "noticeDao" class="store.dao.NoticeDaoImpl">
+  	<property name="dataSource">
+  		<ref bean="dataSource"/>
+  	</property>
+  </bean>
 
   <!-- CategoryCatalog -->
   <bean id="categoryCatalog" class="store.logic.CategoryCatalogImpl">
@@ -136,6 +143,13 @@
     </property>
   </bean>
   
+  <!-- NoticeCatalog -->
+  <bean id="noticeCatalog" class="store.logic.NoticeCatalogImpl">
+  	<property name="noticeDao">
+  	  <ref bean="noticeDao"/>
+  	</property>
+  </bean>
+  
   <!-- Shop -->
   <bean id="shopSerivce" class="store.logic.ShopImpl">
     <property name="itemCatalog">
@@ -158,6 +172,9 @@
     </property>
     <property name="feedbackCatalog">
       <ref bean="feedbackCatalog"/>
+    </property>
+    <property name="noticeCatalog">
+      <ref bean="noticeCatalog"/>
     </property>
   </bean>
   

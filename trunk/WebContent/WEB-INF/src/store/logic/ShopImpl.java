@@ -11,6 +11,7 @@ public class ShopImpl implements Shop {
 	private InvoiceCatalog invoiceCatalog;
 	private OrderCatalog orderCatalog;
 	private FeedbackCatalog feedbackCatalog;
+	private NoticeCatalog noticeCatalog;
 	
 	// item
 	public void setItemCatalog(ItemCatalog itemCatalog)
@@ -197,5 +198,31 @@ public class ShopImpl implements Shop {
 	
 	public List getItemFeedback(int itemId) {
 		return this.feedbackCatalog.getItemFeedback(itemId);
+	}
+	
+	// Notice methods -----------------------------------------
+
+	public void setNoticeCatalog(NoticeCatalog noticeCatalog) {
+		this.noticeCatalog = noticeCatalog;
+	}
+	
+	public void addNotice(Notice notice) {
+		this.noticeCatalog.add(notice);
+	}
+	
+	public void deleteNotice(int noticeId) {
+		this.noticeCatalog.delete(noticeId);
+	}
+	
+	public void updateNotice(Notice notice) {
+		this.noticeCatalog.update(notice);
+	}
+	
+	public Notice getNotice(int noticeId) {
+		return this.noticeCatalog.get(noticeId);
+	}
+	
+	public List getAllNotice() {
+		return this.noticeCatalog.getAll();
 	}
 }
