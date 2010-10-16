@@ -14,7 +14,7 @@ import store.logic.Shop;
 import store.logic.Event;
 import store.web.WebConstants;
 
-public class IndexController implements Controller {
+public class CategoryController implements Controller {
 	
 	private Shop shopService;
 	

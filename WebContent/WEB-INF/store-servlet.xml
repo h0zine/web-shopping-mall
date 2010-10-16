@@ -9,12 +9,25 @@
         class = "org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
     <property name="mappings">
       <props>
-        <prop key="/member/join.oz">userEntryFormController</prop>
+      
+      	<!-- client -->
         <prop key="/index.oz">indexController</prop>
+        <prop key="/category.oz">categoryController</prop>
+        
+        <prop key="/member/join.oz">userEntryFormController</prop>
+        
+        
+        <!-- admin main -->
         <prop key="/admin/index.oz">adminIndexController</prop>
 
 		<!-- admin board -->
         <prop key="/admin/board/index.oz">adminBoardController</prop>
+        
+        <!-- admin notice -->
+        <prop key="/admin/notice/index.oz">adminListNoticeController</prop>
+        <prop key="/admin/notice/add.oz">adminAddNoticeController</prop>
+        <prop key="/admin/notice/delete.oz">adminDeleteNoticeController</prop>
+        <prop key="/admin/notice/edit.oz">adminEditNoticeController</prop>
 
         <!-- admin category -->
         <prop key="/admin/category/index.oz">adminCategoryController</prop>
@@ -56,6 +69,11 @@
   	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
   
+  <bean id="categoryController" class="store.web.controller.CategoryController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+
   <bean id="userEntryFormController" class="store.web.controller.UserEntryFormController">
   	<property name="sessionForm"><value>false</value></property>
   	<property name="commandName"><value>user</value></property>
@@ -74,6 +92,35 @@
   </bean>
   <!-- Board controller end -->
 
+  <!-- Notice controller start -->
+  <bean id="adminListNoticeController" class="store.web.controller.admin.notice.AdminListNoticeController">
+    	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminAddNoticeController" class="store.web.controller.admin.notice.AdminAddNoticeController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>notice</value></property>
+  	<property name="commandClass"><value>store.logic.Notice</value></property>
+  	<property name="formView"><value>admin.noticeEntry</value></property>
+  	<property name="successView"><value>admin.noticeEntrySuccess</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminDeleteNoticeController" class="store.web.controller.admin.notice.AdminDeleteNoticeController">
+    	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="adminEditNoticeController" class="store.web.controller.admin.notice.AdminEditNoticeController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>notice</value></property>
+  	<property name="commandClass"><value>store.logic.Notice</value></property>
+  	<property name="formView"><value>admin.noticeEdit</value></property>
+  	<property name="successView"><value>admin.noticeEditSuccess</value></property>
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+  <!-- Notice controller end -->
+  
+  
   <!-- Category controller start -->
   <bean id="adminCategoryController" class="store.web.controller.admin.category.AdminCategoryController">
     	<property name="shopService"><ref bean="shopSerivce"/></property>

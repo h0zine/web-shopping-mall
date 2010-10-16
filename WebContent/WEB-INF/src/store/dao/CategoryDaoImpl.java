@@ -183,7 +183,7 @@ public class CategoryDaoImpl extends JdbcDaoSupport implements CategoryDao
 	}
 
 	public Category get(int id) {
-		return (Category) getJdbcTemplate().query(CategoryDaoImpl.SELECT_CATEGORY, new PstmtSetterForSelectCategory(id), new CategoryResultSetExtractor());
+		return (Category) getJdbcTemplate().query(CategoryDaoImpl.SELECT_CATEGORY, new Object[] { new Integer(id) }, new CategoryResultSetExtractor());
 	}
 
 	public void update(Category category) {
