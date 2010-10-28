@@ -14,4 +14,5 @@ public interface ItemDao
 	void delete(int id);
 	void update(Item item);
 	Item get(int id);
+	List getByCategory(int category);
 }

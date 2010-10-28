@@ -32,6 +32,7 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 		"last_sold=?, last_visit=?, last_update=?, category_id_1=?, category_id_2=?, category_id_3=?, " +
 		"event_id_1=?, event_id_2=?, event_id_3=? WHERE item_id = ?";
 	private static final String GET_ITEM = "SELECT * FROM item WHERE item_id = ?";
+	private static final String GET_ITEM_BY_CATEGORY = "SELECT * FROM item WHERE category_id_1 = ? OR category_id_2 = ? OR category_id_3 = ?";
 	
 	private class ItemRowMapper implements RowMapper
 	{
@@ -248,6 +249,11 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	
 	public Item get(int id) {
 		return (Item) getJdbcTemplate().query(ItemDaoImpl.GET_ITEM, new PstmtSetterGetItem(id), new RsItem());
+	}
+	
+	public List getByCategory(int category) {
+		Integer ca = new Integer(category);
+		return getJdbcTemplate().query(ItemDaoImpl.GET_ITEM_BY_CATEGORY,  new Object[] { ca, ca, ca },  new ItemRowMapper());
 	}
 }
 

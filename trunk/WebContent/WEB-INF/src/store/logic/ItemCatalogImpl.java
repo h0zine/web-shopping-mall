@@ -40,4 +40,7 @@ public class ItemCatalogImpl implements ItemCatalog
 	public Item getItem(int id) {
 		return this.itemDao.get(id);
 	}
+	public List getItemByCategory(int category) {
+		return this.itemDao.getByCategory(category);
+	}
 }

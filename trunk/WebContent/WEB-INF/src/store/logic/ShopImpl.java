@@ -50,6 +50,10 @@ public class ShopImpl implements Shop {
 		return this.itemCatalog.getItem(id);
 	}
 
+	public List getItemByCategory(int category) {
+		return this.itemCatalog.getItemByCategory(category);
+	}
+	
 	// event item
 	public List getEventItemList(int index)
 	{
@@ -90,6 +94,14 @@ public class ShopImpl implements Shop {
 	public void updateCategory(Category category)
 	{
 		this.categoryCatalog.update(category);
+	}
+	
+	public 	List findAllDesCategory(int parent) {
+		return this.categoryCatalog.findAllDescendant(parent);
+	}
+
+	public List getCategoryPath(int category) {
+		return this.categoryCatalog.getPath(category);
 	}
 	
 	// Events

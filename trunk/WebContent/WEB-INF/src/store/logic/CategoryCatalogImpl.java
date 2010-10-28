@@ -41,4 +41,12 @@ public class CategoryCatalogImpl implements CategoryCatalog
 	{
 		this.categoryDao.update(category);
 	}
+	
+	public List findAllDescendant(int parent) {
+		return this.categoryDao.findAllDescendant(parent);
+	}
+	
+	public List getPath(int category) {
+		return this.categoryDao.getPath(category);
+	}
 }

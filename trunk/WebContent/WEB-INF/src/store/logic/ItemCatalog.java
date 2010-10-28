@@ -11,4 +11,5 @@ public interface ItemCatalog {
 	void delete(int id);
 	void update(Item item);
 	Item getItem(int id);
+	List getItemByCategory(int category);
 }
