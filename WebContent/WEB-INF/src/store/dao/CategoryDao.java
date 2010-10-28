@@ -7,6 +7,9 @@ import store.logic.Category;
 public interface CategoryDao {
 	List findAllCategory();
 	List findAllCategory(int parent);
+	List findAllDescendant(int parentId);
+	List getPath(int category);
+	
 	void entry(Category category);
 	void delete(int id);
 	Category get(int id);

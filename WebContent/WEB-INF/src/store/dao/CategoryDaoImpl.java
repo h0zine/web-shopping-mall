@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -26,6 +27,9 @@ public class CategoryDaoImpl extends JdbcDaoSupport implements CategoryDao
 	private static final String UPDATE_CATEGORY   = "UPDATE category SET category_name = ? WHERE category_id = ?";
 	private static final String MAKE_SPACE        = "UPDATE category SET category_order = category_order + 1 WHERE category_thread = ? AND category_order > ?";
 	private static final String SET_THREAD        = "UPDATE category SET category_thread = category_id WHERE category_thread = 0";
+	private static final String SELECT_DESCENDANT =
+		"SELECT * FROM category WHERE category_thread = ? ORDER BY category_thread, category_order";
+	private static final String SELECT_PATH       = "SELECT c1.* FROM category c1, category c2 WHERE c1.category_thread = c2.category_thread AND c2.category_id = ? AND c1.category_order <= c2.category_order ORDER BY c1.category_order ASC";
 	
 	private class CategoryRowMapper implements RowMapper
 	{
@@ -188,5 +192,48 @@ public class CategoryDaoImpl extends JdbcDaoSupport implements CategoryDao
 
 	public void update(Category category) {
 		getJdbcTemplate().update(CategoryDaoImpl.UPDATE_CATEGORY, new PstmtSetterForUpdateCategory(category));
+	}
+
+
+	public List findAllDescendant(int parentId) {
+		Category ca = get(parentId);
+		List descendants = getJdbcTemplate().query(SELECT_DESCENDANT, new Object[] { ca.getThread() } , new CategoryRowMapper());
+		
+		ArrayList list = new ArrayList();
+		list.add(ca);
+
+
+		int i = 0;
+		Category de = (Category) descendants.get(i);
+		while (de.getOrder().intValue() != ca.getOrder().intValue() && i < descendants.size()) {
+			i ++;
+			de = (Category) descendants.get(i);
+		}
+
+		// get items for descendant category
+		while (i < descendants.size()) {	
+			de = (Category) descendants.get(i);
+			if (de.getDepth().intValue() > ca.getDepth().intValue())
+				list.add(de);
+			i++;
+		}
+		
+		// remove duplicate;
+		for (int j = 0; j < list.size(); j++) {
+			int caId = ((Category) list.get(j)).getId().intValue();
+			
+			int k = j + 1;
+			for (; k < list.size(); k++) {
+				if (caId == ((Category) list.get(k)).getId().intValue()) {
+					((Category) list.get(k)).setId(new Integer(0));
+				}
+			}
+		}
+		
+		return list; 
+	}
+	
+	public List getPath(int category) {
+		return getJdbcTemplate().query(SELECT_PATH, new Object[] { new Integer(category)}, new CategoryRowMapper());
 	}
 }

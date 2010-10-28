@@ -13,8 +13,17 @@
       	<!-- client -->
         <prop key="/index.oz">indexController</prop>
         <prop key="/category.oz">categoryController</prop>
+        <prop key="/item.oz">itemController</prop>
+        <prop key="/notice.oz">noticeController</prop>
+        
+        <prop key="/cart.oz">cartController</prop>
+        <prop key="/cart/add.oz">cartAddController</prop>
+        <prop key="/cart/del.oz">cartDeleteController</prop>
+        <prop key="/cart/clear.oz">cartClearController</prop>
+        <prop key="/cart/checkout.oz">cartCheckoutController</prop>
         
         <prop key="/member/join.oz">userEntryFormController</prop>
+
         
         
         <!-- admin main -->
@@ -72,6 +81,36 @@
   <bean id="categoryController" class="store.web.controller.CategoryController">
   	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
+
+  <bean id="itemController" class="store.web.controller.ItemController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="noticeController" class="store.web.controller.NoticeController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+
+  <bean id="cartController" class="store.web.controller.cart.CartController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="cartAddController" class="store.web.controller.cart.CartAddController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="cartDeleteController" class="store.web.controller.cart.CartDeleteController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="cartClearController" class="store.web.controller.cart.CartClearController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
+  <bean id="cartCheckoutController" class="store.web.controller.cart.CartCheckoutController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
+
 
 
   <bean id="userEntryFormController" class="store.web.controller.UserEntryFormController">

@@ -13,4 +13,7 @@ public class WebConstants {
 	public static final String INVOICE_DETAIL = "INVOICE_DETAIL";
 	public static final String FEEDBACK_LIST = "FEEDBACK_LIST";
 	public static final String NOTICE_LIST = "NOTICE_LIST";
+	
+	public static final String[] ORDER_STATUS = {"CART", "PAYED", "PREPARING", "POSTED", "ARRIVED", "CANCELLED"};
+	public static final String CART = "CART";
 }
