@@ -13,7 +13,7 @@ public class EventCatalogImpl implements EventCatalog {
 		this.eventDao = eventDao;
 	}
 	
-	public List findAllEvent() {
+	public List<Event> findAllEvent() {
 		return this.eventDao.findAllEvent();
 	}
 

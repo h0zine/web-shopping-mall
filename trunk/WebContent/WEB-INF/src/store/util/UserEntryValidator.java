@@ -8,6 +8,7 @@ import store.logic.User;
 
 public class UserEntryValidator implements Validator {
 
+	@SuppressWarnings("rawtypes")
 	public boolean supports(Class clazz) {
 		return User.class.isAssignableFrom(clazz);
 	}
@@ -45,7 +46,6 @@ public class UserEntryValidator implements Validator {
 		}
 
 		if (errors.hasErrors()) {
-			// ������ ������ ��� �޽��� �Է�, ���� �޽��� �߰�
 			errors.reject("error.input");
 		}
 	}

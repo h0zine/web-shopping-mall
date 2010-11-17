@@ -23,6 +23,7 @@ public class CategoryController implements Controller {
 		this.shopService = shopService;
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		int categoryId;

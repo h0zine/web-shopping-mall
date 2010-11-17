@@ -5,10 +5,10 @@ import java.util.List;
 import store.logic.Category;
 
 public interface CategoryDao {
-	List findAllCategory();
-	List findAllCategory(int parent);
-	List findAllDescendant(int parentId);
-	List getPath(int category);
+	List<Category> findAllCategory();
+	List<Category> findAllCategory(int parent);
+	List<Category> findAllDescendant(int parentId);
+	List<Category> getPath(int category);
 	
 	void entry(Category category);
 	void delete(int id);

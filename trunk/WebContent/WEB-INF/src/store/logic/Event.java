@@ -7,7 +7,7 @@ public class Event
 	private Integer event_id;
 	private String  event_name;
 	private Integer event_order;
-	private List items;
+	private List<Item> items;
 	
 	public Integer getEventId() {
 		return event_id;
@@ -27,10 +27,10 @@ public class Event
 	public void setEventOrder(Integer event_order) {
 		this.event_order = event_order;
 	}
-	public List getItems() {
+	public List<Item> getItems() {
 		return items;
 	}
-	public void setItems(List items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 }

@@ -2,6 +2,7 @@ package store.logic;
 
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public interface Shop 
 {
 	// Item related methods
@@ -36,6 +37,8 @@ public interface Shop
 	List getInvoicePage(int pagenum);		// get a page of invoice list
 	Invoice getInvoice(int invoiceId);		// get a detail of invoice
 	void updateInvoice(Invoice invoice);	// update a invoice
+	Invoice createInvoice(List<Order> orders);		// create invoice containing orders
+	List getInvoiceList(String email, String id);
 	
 	// Order method
 	List getOrderByInvoiceId(int invoiceId);// get a list of order which are included in a invoice

@@ -6,13 +6,13 @@ import store.logic.Item;
 
 public interface ItemDao 
 {
-	List findAll();
-	List findEvent(int index);
-	List getPage(int page);
+	List<Item> findAll();
+	List<Item> findEvent(int index);
+	List<Item> getPage(int page);
 	Integer getNumPage();
 	void entry(Item item);
 	void delete(int id);
 	void update(Item item);
 	Item get(int id);
-	List getByCategory(int category);
+	List<Item> getByCategory(int category);
 }

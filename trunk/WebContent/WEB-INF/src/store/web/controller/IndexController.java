@@ -22,6 +22,7 @@ public class IndexController implements Controller {
 		this.shopService = shopService;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		Map model = new HashMap();

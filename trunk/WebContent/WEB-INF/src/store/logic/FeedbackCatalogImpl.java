@@ -11,7 +11,7 @@ public class FeedbackCatalogImpl implements FeedbackCatalog {
 		this.dao = dao;
 	}
 	
-	public List getPage(int page) {
+	public List<Feedback> getPage(int page) {
 		return this.dao.getPage(page);
 	}
 
@@ -23,7 +23,7 @@ public class FeedbackCatalogImpl implements FeedbackCatalog {
 		this.dao.delete(feedbackId);
 	}
 
-	public List getItemFeedback(int itemId) {
+	public List<Feedback> getItemFeedback(int itemId) {
 		return this.dao.getItemFeedback(itemId);
 	}
 

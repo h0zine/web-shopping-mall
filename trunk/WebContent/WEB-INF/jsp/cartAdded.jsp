@@ -7,12 +7,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Shopping Cart</title>
 </head>
 <body><center>
-¼îÇÎÄ«Æ®¿¡ µî·ÏµÇ¾ú½À´Ï´Ù.<br>
-<a href="<spring:message code="store.path"/>/cart.oz">¼îÇÎÄ«Æ®·Î ÀÌµ¿</a><br>
-<a href="<spring:message code="store.path"/>/category.oz">¼îÇÎ °è¼Ó</a><br>
+Selected Item has been added to shopping cart.<br>
+<a href="<spring:message code="store.path"/>/cart.oz">Check Shopping Cart</a><br>
+<a href="<spring:message code="store.path"/>/category.oz">Continue Shopping</a><br>
 </center>
 </body>
 </html>

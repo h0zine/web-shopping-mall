@@ -4,6 +4,7 @@ import java.util.List;
 import store.dao.OrderDao;
 import store.dao.OptionDao;
 
+@SuppressWarnings("rawtypes")
 public class OrderCatalogImpl implements OrderCatalog
 {
 	OrderDao orderDao;

@@ -3,6 +3,7 @@ package store.dao;
 import java.util.List;
 import store.logic.User;
 
+@SuppressWarnings("rawtypes")
 public interface UserDao {
 	void create(User user);
 	User getById(String id);

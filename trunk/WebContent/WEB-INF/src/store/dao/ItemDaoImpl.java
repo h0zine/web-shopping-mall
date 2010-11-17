@@ -28,7 +28,7 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 		"event_id_1, event_id_2, event_id_3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_ITEM = "DELETE FROM item WHERE item_id = ?";
 	private static final String UPDATE_ITEM =
-		"UPDATE item SET item_name=?, price=?, description=?, picture_url=?, visit=?, sold, amount=?, " +
+		"UPDATE item SET item_name=?, price=?, description=?, picture_url=?, visit=?, sold=?, amount=?, " +
 		"last_sold=?, last_visit=?, last_update=?, category_id_1=?, category_id_2=?, category_id_3=?, " +
 		"event_id_1=?, event_id_2=?, event_id_3=? WHERE item_id = ?";
 	private static final String GET_ITEM = "SELECT * FROM item WHERE item_id = ?";
@@ -164,7 +164,7 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 		public PstmtSetterUpdateItem(Item item) {
 			this.item = item;
 		}
-		
+
 		public void setValues(PreparedStatement pstmt) throws SQLException {
 			pstmt.setString(1,item.getItemName());
 			pstmt.setInt(2, item.getPrice().intValue());
@@ -200,7 +200,8 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 		
 	}
 	
-	public List findAll() {
+	@SuppressWarnings("unchecked")
+	public List<Item> findAll() {
 		return getJdbcTemplate().query(ItemDaoImpl.SELECT_ALL, new ItemRowMapper());
 	}
 		
@@ -223,11 +224,13 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 		}
 	}
 	
-	public List findEvent(int index) {
+	@SuppressWarnings("unchecked")
+	public List<Item> findEvent(int index) {
 		return getJdbcTemplate().query(SELECT_EVENT_ITEM, new Object[] { new Integer(index),new Integer(index),new Integer(index) }, new ItemRowMapper());
 	}
 	
-	public List getPage(int page) {
+	@SuppressWarnings("unchecked")
+	public List<Item> getPage(int page) {
 		return getJdbcTemplate().query(ItemDaoImpl.SELEC_ALL_ON_PAGE, new PstmtSetterForSelectPage(page), new ItemRowMapper());
 	}
 	
@@ -244,14 +247,20 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 	}
 	
 	public void update(Item item) {
-		getJdbcTemplate().update(ItemDaoImpl.UPDATE_ITEM, new PstmtSetterUpdateItem(item));
+		try {
+			getJdbcTemplate().update(ItemDaoImpl.UPDATE_ITEM, new PstmtSetterUpdateItem(item));
+		}
+		catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
 	}
 	
 	public Item get(int id) {
 		return (Item) getJdbcTemplate().query(ItemDaoImpl.GET_ITEM, new PstmtSetterGetItem(id), new RsItem());
 	}
 	
-	public List getByCategory(int category) {
+	@SuppressWarnings("unchecked")
+	public List<Item> getByCategory(int category) {
 		Integer ca = new Integer(category);
 		return getJdbcTemplate().query(ItemDaoImpl.GET_ITEM_BY_CATEGORY,  new Object[] { ca, ca, ca },  new ItemRowMapper());
 	}

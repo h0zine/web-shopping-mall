@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import store.logic.Shop;
 import store.logic.Category;
-import store.web.WebConstants;
 
 public class AdminAddCategoryController extends SimpleFormController 
 {

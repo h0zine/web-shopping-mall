@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import store.logic.User;
 
+@SuppressWarnings("rawtypes")
 public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
 	private static final String INSERT

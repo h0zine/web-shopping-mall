@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 import store.logic.Order;
 import store.logic.Shop;
 
+@SuppressWarnings("rawtypes")
 public class AdminOrderDetailController extends SimpleFormController 
 {
 	Shop shopService;
@@ -61,12 +62,20 @@ public class AdminOrderDetailController extends SimpleFormController
 	protected ModelAndView onSubmit(HttpServletRequest req, HttpServletResponse res, Object cmd, BindException exception) throws Exception
 	{
 		Order order = (Order) cmd;
-		order.setLastUpdate(new java.util.Date());
 		try {
-			shopService.updateOrder(order);
-			ModelAndView modelAndView = new ModelAndView(getSuccessView());
-			modelAndView.addObject("invoice_id", new Integer(order.getInvoiceId()));
-			return modelAndView;
+			Order origOrd = shopService.getOrder(order.getOrderId());
+			if (origOrd == null || origOrd.getOrderId() != order.getOrderId()) {
+				exception.reject("error.invalidOrder");
+				return showForm(req, res, exception);
+			}
+			else {
+				origOrd.setStatus(order.getStatus());
+				origOrd.setLastUpdate(new java.util.Date());
+				shopService.updateOrder(origOrd);
+				ModelAndView modelAndView = new ModelAndView(getSuccessView());
+				modelAndView.addObject("invoiceId", new Integer(order.getInvoiceId()));
+				return modelAndView;
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace(System.err);

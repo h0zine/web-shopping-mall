@@ -9,5 +9,5 @@ public interface NoticeDao
 	Notice get(int noticeId);
 	void delete(int noticeId);
 	void update(Notice notice);
-	List getAll();
+	List<Notice> getAll();
 }

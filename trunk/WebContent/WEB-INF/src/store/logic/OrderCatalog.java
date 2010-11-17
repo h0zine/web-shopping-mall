@@ -2,6 +2,7 @@ package store.logic;
 
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public interface OrderCatalog {
 	public List findAll();
 	public List findAll(int invoiceId);

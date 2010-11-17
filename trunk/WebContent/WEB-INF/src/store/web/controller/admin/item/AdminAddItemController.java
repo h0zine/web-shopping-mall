@@ -29,6 +29,7 @@ public class AdminAddItemController extends SimpleFormController
 		this.shopService = shop;
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected Map referenceData(HttpServletRequest request) throws Exception 
 	{
 		//System.out.println("referenceData()");

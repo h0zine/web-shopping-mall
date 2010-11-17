@@ -11,7 +11,7 @@ public class InvoiceCatalogImpl implements InvoiceCatalog {
 		this.invoiceDao = invoiceDao;
 	}
 	
-	public List getPage(int pagenum) {
+	public List<Invoice> getPage(int pagenum) {
 		return invoiceDao.getPage(pagenum);
 	}
 
@@ -21,5 +21,13 @@ public class InvoiceCatalogImpl implements InvoiceCatalog {
 	
 	public void updateInvoice(Invoice invoice) {
 		invoiceDao.updateInvoice(invoice);
+	}
+	
+	public Invoice createInovice() {
+		return invoiceDao.createInvoice();
+	}
+	
+	public List<Invoice> getInvoiceList(String email, String id) {
+		return invoiceDao.findAll(email, id);
 	}
 }

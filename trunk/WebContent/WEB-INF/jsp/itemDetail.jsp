@@ -41,41 +41,29 @@ body {margin:0; padding:0; background:#BBBBBB;}
 <font color="red"><c:out value="${loginErrorMsg }"/></font>
 <table>
 	<tr>
-		<td>product name:</td>
+		<td rowspan="5"><img src="<c:out value="${item.pictureUrl}"/>" border="0"/></td>
+		<td>product</td>
 		<td>
 			<c:out value="${item.itemName}"/>
 		</td>
 	</tr>
 	<tr>
 		<td>price</td>
-		<td>
-			<c:out value="${item.price}"/>
-		</td>
-	</tr>
-	<tr>
-		<td>image URL</td>
-		<td>
-			<c:out value="${item.pictureUrl}"/>
-		</td>
+		<td><c:out value="${item.price}"/></td>
 	</tr>
 	<tr>
 		<td>stock</td>
-		<td>
-			<c:out value="${item.amount}"/>
-		</td>
+		<td><c:out value="${item.amount}"/></td>
 	</tr>
 	<tr>
-		<td>amount to buy</td>
+		<td>amount</td>
 		<td><input type="text" name="amount"></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="right">
-			<input type="submit" value="Buy">
-		</td>
+		<td colspan="2" align="right"><input type="submit" value="Buy"></td>
 	</tr>
 	<tr>
-		<td>description</td>
-		<td>
+		<td colspan="3">
 			<c:out value="${item.description}"/>
 		</td>
 	</tr>

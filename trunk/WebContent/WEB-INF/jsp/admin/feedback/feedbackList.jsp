@@ -2,30 +2,29 @@
 <%@ include file="/WEB-INF/jsp/jsp_header.jsp" %>
 <html>
 <head>
-<title>관리자 메뉴 - Feedback 관리</title>
+<title><spring:message code="store.name"/> - Feedback Manager</title>
 </head>
-<body>
+<link rel=stylesheet type="text/css" href="<spring:message code="store.path"/>/css/admin-general.css" >
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/page.css" />
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/buttons.css" />
+<body><center><table width="800" height="1000"><tr><td valign="top">
 <%@ include file="/WEB-INF/jsp/admin/menu.jsp" %>
-
-<table>
-	<tr>
-		<td>Feedback</td><td>평점</td><td>작성자</td><td>메뉴</td>
+<div style="position:relative;top:10;left:10">
+<table class="solid-border-1" border="0" cellpadding="0" cellspacing="0">
+	<tr class="header-1" height="25" align="center">
+		<td width="550">Comment</td>
+		<td width="80">Point</td>
+		<td width="120">Writer</td>
 	</tr>
 	
 	<c:forEach items="${FEEDBACK_LIST}" var="feedback">
-	<tr>
-		<td>
-			<c:out value="${feedback.comment }"/>
-		</td>
-		<td><c:out value="${feedback.point}"/></td>
-		<td><c:out value="${feedback.writerName}"/></td>
-		<td>
-			[<a href="delete.oz?fid=<c:out value="${feedback.id }"/>"">-</a>] 
-			[<a href="editCategory.oz?id=<c:out value="${feedback.itemId }"/>"">=</a>] 
-		</td>
+	<tr class="content-1" height="25">
+		<td class="top-line-1">&nbsp;${feedback.comment }</td>
+		<td class="top-line-1" align="center">${feedback.point}</td>
+		<td class="top-line-1" align="center">${feedback.writerName}</td>
 	</tr>
 	</c:forEach>
 </table>
-
+</div></td></tr></table></center>
 </body>
 </html>

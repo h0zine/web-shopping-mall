@@ -27,7 +27,7 @@ public class NoticeCatalogImpl implements NoticeCatalog {
 		return dao.get(noticeId);
 	}
 
-	public List getAll() {
+	public List<Notice> getAll() {
 		return dao.getAll();
 	}
 

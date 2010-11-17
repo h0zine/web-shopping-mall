@@ -2,107 +2,66 @@
 <%@ include file="/WEB-INF/jsp/jsp_header.jsp" %>    
 <html>
 <head>
-<title><spring:message code="store.name"/> - 판매관리</title>
+<title><spring:message code="store.name"/> - Order Manager</title>
 </head>
-<body>
+<link rel=stylesheet type="text/css" href="<spring:message code="store.path"/>/css/admin-general.css" >
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/page.css" />
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/buttons.css" />
+<body><center><table width="800" height="1000"><tr><td valign="top">
+<%@ include file="/WEB-INF/jsp/admin/menu.jsp" %>
+<div style="position:relative;top:10;left:10">
 <form name="frm" action="orderDetail.oz" method="post">
 <font color="red"><c:out value="${loginErrorMsg }"/></font>
-<table>
-	<tr>
-		<td>일련번호</td>
-		<td>
-			<spring:bind path="order.orderId">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
+<table class="solid-border-1" border="0" cellpadding="0" cellspacing="0">
+	<tr height="25">
+		<td class="header-1" align="center" width="120">Ref No.</td>
+		<td class="content-1" style="padding: 0 5" width="350">${order.orderId}</td>
 	</tr>
 
-	<tr>
-		<td>주문일</td>
-		<td>
-			<spring:bind path="order.createDate">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
+	<tr height="25">
+		<td class="header-1 top-line-1" align="center">Order Date</td>
+		<td class="content-1 top-line-1" style="padding: 0 5">${order.createDate}</td>
 	</tr>
 
-	<tr>
-		<td>업데이트일</td>
-		<td>
-			<spring:bind path="order.lastUpdate">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
+	<tr height="25">
+		<td class="header-1 top-line-1" align="center">Update Date</td>
+		<td class="content-1 top-line-1" style="padding: 0 5">${order.lastUpdate }</td>
 	</tr>
 
-	<tr>
-		<td>물품명</td>
-		<td>
-			<spring:bind path="order.productName">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
+	<tr height="25">
+		<td class="header-1 top-line-1" align="center">Product</td>
+		<td class="content-1 top-line-1" style="padding: 0 5">${order.productName }</td>
 	</tr>
 
-	<tr>
-		<td>물품가격</td>
-		<td>
-			<spring:bind path="order.price">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
+	<tr height="25">
+		<td class="header-1 top-line-1" align="center">Price</td>
+		<td class="content-1 top-line-1" style="padding: 0 5">${order.price }</td>
 	</tr>
 
-	<tr>
-		<td>물품수량</td>
-		<td>
-			<spring:bind path="order.amount">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
+	<tr height="25">
+		<td class="header-1 top-line-1" align="center">Amount</td>
+		<td class="content-1 top-line-1" style="padding: 0 5">${order.amount }</td>
 	</tr>
 
-	<tr>
-		<td>상태</td>
-		<td>
-			<spring:bind path="order.status">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-	
-	<tr>
-		<td colspan="2" align="right">
-			<input type="submit" value="등록">
+	<tr height="25">
+		<td class="header-1 top-line-1" align="center">Status</td>
+		<td class="content-1 top-line-1" style="padding: 0 5">
+			<select name="status">
+				<option value="Ordered" <c:if test="${order.status=='Ordered'}">SELECTED</c:if>>Ordered</option>
+				<option value="Prepared" <c:if test="${order.status=='Prepared'}">SELECTED</c:if>>Prepared</option>
+				<option value="Posted" <c:if test="${order.status=='Posted'}">SELECTED</c:if>>Posted</option>
+				<option value="Returned" <c:if test="${order.status=='Returned'}">SELECTED</c:if>>Returned</option>
+			</select>
 		</td>
 	</tr>
 </table>
+<a href="invoiceDetail.oz?id=${order.invoiceId }" class="button gray blue" style="position:relative;top:10;left:330">Invoice</a>
+<input type="submit" class="button mini blue" style="position:relative;top:10;left:350" value="Update">
 
-<spring:bind path="order.invoiceId">
-	<input type="hidden" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>" >
-</spring:bind>
+<input type="hidden" name="invoiceId" value="${order.invoiceId }" >
+<input type="hidden" name="orderId" value="${order.orderId }" >
+
 </form>
-
+</div></td></tr></table></center>
 </body>
 </html>

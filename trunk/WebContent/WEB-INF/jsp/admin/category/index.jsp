@@ -2,25 +2,33 @@
 <%@ include file="/WEB-INF/jsp/jsp_header.jsp" %>
 <html>
 <head>
-<title>관리자 메뉴 - 카테고리 관리</title>
+<title><spring:message code="store.name"/> - Category Manager</title>
 </head>
-<body>
+<link rel=stylesheet type="text/css" href="<spring:message code="store.path"/>/css/admin-general.css" >
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/page.css" />
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/buttons.css" />
+<body><center><table width="800" height="1000"><tr><td valign="top">
 <%@ include file="/WEB-INF/jsp/admin/menu.jsp" %>
-
-<table>
-	<tr><td>카테고리명</td><td>메뉴</td></tr>
-<c:forEach items="${CATEGORY_LIST}" var="category">
-	<tr>
-		<td>
+<div style="position:relative;top:10;left:10">
+<table class="solid-border-1" border="0" cellpadding="0" cellspacing="0">
+	<tr align="center" height="25">
+		<td class="header-1" width="300">Category</td>
+		<td class="header-1" width="100">Action</td></tr>
+	
+	<c:forEach items="${CATEGORY_LIST}" var="category">
+	<tr height="25">
+		<td class="content-1 top-line-1" style="padding: 0 5">
 			<c:forEach begin="0" end="${category.depth}" step="1">&nbsp;</c:forEach>
-			<a href="category.oz"><c:out value="${category.name }"/></a></td>
-		<td>
-			[<a href="delCategory.oz?id=<c:out value="${category.id }"/>"">-</a>] 
-			[<a href="editCategory.oz?id=<c:out value="${category.id }"/>"">=</a>] 
-			[<a href="addCategory.oz?parent=<c:out value="${category.id }"/>">+</a>]</td>
+			<c:out value="${category.name }"/></td>
+		<td class="content-1 top-line-1" align="center">
+			<a href="editCategory.oz?id=${category.id }" class="button micro gray">[E]</a> 
+			<a href="addCategory.oz?parent=${category.id }" class="button micro blue">[A]</a>
+			<a href="delCategory.oz?id=${category.id }" class="button micro orange">[D]</a> 
+			</td>
 	</tr>
-</c:forEach>
-	<tr><td colspan="2"><a href="addCategory.oz">카테고리 추가</a></td></tr>
+	</c:forEach>
 </table>
+<a href="addCategory.oz" class="button mini blue" style="position:relative;top:10;left:360">Add</a>
+</div></td></tr></table></center>
 </body>
 </html>

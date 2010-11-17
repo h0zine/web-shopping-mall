@@ -2,6 +2,7 @@ package store.logic;
 
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public class ShopImpl implements Shop {
 
 	private ItemCatalog itemCatalog;
@@ -146,6 +147,27 @@ public class ShopImpl implements Shop {
 	}
 	public void updateInvoice(Invoice invoice) {
 		this.invoiceCatalog.updateInvoice(invoice);
+	}
+	
+	public Invoice createInvoice(List<Order> orders) {
+		Invoice invoice = this.invoiceCatalog.createInovice();
+		for (int i = 0; i < orders.size(); i++) {
+			Order order = orders.get(i);
+			order.setInvoiceId(invoice.getId());
+			this.orderCatalog.add(order);
+		}
+		return invoice;
+	}
+	
+	public List<Invoice> getInvoiceList(String email, String id) {
+		List<Invoice> invoices = this.invoiceCatalog.getInvoiceList(email, id);
+		if (invoices != null) {
+			for (int i = 0; i < invoices.size(); i++) {
+				Invoice invoice = invoices.get(i);
+				invoice.setOrder(this.orderCatalog.findAll(invoice.getId()));
+			}
+		}
+		return invoices;
 	}
 	
 	// Order

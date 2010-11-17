@@ -10,39 +10,44 @@
 %>
 <html>
 <head>
-<title>관리자 메뉴 - 상품관리</title>
+<title><spring:message code="store.name"/> - Product Manager</title>
 </head>
-<body>
+<link rel=stylesheet type="text/css" href="<spring:message code="store.path"/>/css/admin-general.css" >
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/page.css" />
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/buttons.css" />
+<body><center><table width="800" height="1000"><tr><td valign="top">
 <%@ include file="/WEB-INF/jsp/admin/menu.jsp" %>
-
-<table>
-	<tr>
-		<td align="center">상품명</td>
-		<td align="center">가격</td>
-		<td align="center">재고</td>
-		<td align="center">판매량</td>
-		<td align="center">조회수</td>
-		<td align="center">등록일</td>
-		<td align="center">마지막판매일</td>
-		<td align="center">메뉴</td>
+<div style="position:relative;top:10;left:10">
+<table class="solid-border-1" border="0" cellpadding="0" cellspacing="0">
+	<tr class="header-1" height="25" align="center">
+		<td align="left" width="300">&nbsp;Product</td>
+		<td width="120">Price</td>
+		<td width="80">Stock</td>
+		<td width="80">Sold</td>
+		<td width="80">View</td>
+		<td width="80">RegDate</td>
+		<td width="80">Last Sold</td>
+		<td width="90">Edit</td>
 	</tr>
 	
 	<c:forEach items="${ITEM_LIST}" var="item">
-	<tr>
-		<td><a href="edtItem.oz?id=<c:out value="${item.itemId }"/>"><c:out value="${item.itemName }"/></a></td>
-		<td align="center"><c:out value="${item.price }"/></td>
-		<td align="center"><c:out value="${item.amount }"/></td>
-		<td align="center"><c:out value="${item.sold }"/></td>
-		<td align="center"><c:out value="${item.visit }"/></td>
-		<td align="center"><fmt:formatDate type="date" value="${item.lastUpdate}" /></td>
-		<td align="center"><fmt:formatDate type="date" value="${item.lastSold}" /></td>
-		<td>
-			[<a href="delItem.oz?id=<c:out value="${item.itemId }"/>&page=<c:out value="${pg }"/>>">-</a>] 
-			[<a href="editItem.oz?id=<c:out value="${item.itemId }"/>">=</a>]</td>
+	<tr class="content-1" height="25" align="center">
+		<td align="left" class="top-line-1">&nbsp;${item.itemName }</td>
+		<td class="top-line-1">${item.price }</td>
+		<td class="top-line-1">${item.amount }</td>
+		<td class="top-line-1">${item.sold }</td>
+		<td class="top-line-1">${item.visit }</td>
+		<td class="top-line-1"><fmt:formatDate type="date" value="${item.lastUpdate}" /></td>
+		<td class="top-line-1"><fmt:formatDate type="date" value="${item.lastSold}" /></td>
+		<td class="top-line-1">
+			<a href="delItem.oz?id=${item.itemId }&page=${pg }>" class="button micro orange">DEL</a> 
+			<a href="edtItem.oz?id=${item.itemId }" class="button micro blue">EDIT</a>
+		</td>
 	</tr>
 	</c:forEach>
 	
-	<tr><td colspan="8" align="right">[<a href="addItem.oz">New Item</a>]</td></tr>
 </table>
-</body>
+	<a href="addItem.oz" class="button mini blue" style="position:relative;top:10;left:740">New</a>
+</div>
+</td></tr></table></center></body>
 </html>

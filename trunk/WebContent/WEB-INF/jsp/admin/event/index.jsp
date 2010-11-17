@@ -2,23 +2,30 @@
 <%@ include file="/WEB-INF/jsp/jsp_header.jsp" %>
 <html>
 <head>
-<title>관리자 메뉴 - 이벤트 관리</title>
+<title><spring:message code="store.name"/> - Promotion Manager</title>
 </head>
-<body>
+<link rel=stylesheet type="text/css" href="<spring:message code="store.path"/>/css/admin-general.css" >
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/page.css" />
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/buttons.css" />
+<body><center><table width="800" height="1000"><tr><td valign="top">
 <%@ include file="/WEB-INF/jsp/admin/menu.jsp" %>
+<div style="position:relative;top:10;left:10">
+<table class="solid-border-1" border="0" cellpadding="0" cellspacing="0">
+	<tr class="header-1" height="25" align="center">
+		<td width="350">Promotion</td>
+		<td width="150">Action</td></tr>
 
-<table>
-	<tr><td>이벤트 명</td><td>메뉴</td></tr>
-<c:forEach items="${EVENT_LIST}" var="event">
-	<tr>
-		<td>
-			<c:out value="${event.eventName }"/></td>
-		<td>
-			[<a href="delEvent.oz?id=<c:out value="${event.eventId }"/>"">-</a>] 
-			[<a href="editEvent.oz?id=<c:out value="${event.eventId }"/>"">=</a>]</td>
-	</tr>
-</c:forEach>
-	<tr><td colspan="2"><a href="addEvent.oz">이벤트 추가</a></td></tr>
+	<c:forEach items="${EVENT_LIST}" var="event">
+	<tr class="content-1" height="25">
+		<td class="top-line-1">&nbsp;<c:out value="${event.eventName }"/></td>
+		<td class="top-line-1" align="center">
+			[<a href="editEvent.oz?id=<c:out value="${event.eventId }"/>">E</a>]
+			[<a href="delEvent.oz?id=<c:out value="${event.eventId }"/>">D</a>] 
+		</td></tr>
+	</c:forEach>
 </table>
+<a href="addEvent.oz" style="position:relative;top:10;left:390">[Create Promotion]</a>
+</div>
+</td></tr></table></center>
 </body>
 </html>

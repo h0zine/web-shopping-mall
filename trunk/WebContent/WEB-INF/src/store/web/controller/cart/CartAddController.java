@@ -26,6 +26,7 @@ public class CartAddController implements Controller
 		this.shopService = shop;
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		int itemId, amount;
@@ -59,13 +60,9 @@ public class CartAddController implements Controller
 		
 		if (cart == null) {
 			cart = new ArrayList();
-			cart.add(order);
-			//modelAndView.addObject(WebConstants.CART, cart);
 			req.getSession(true).setAttribute(WebConstants.CART, cart);		
 		}
-		else {
-			cart.add(order);
-		}
+		cart.add(order);
 		
 		return modelAndView;
 	}

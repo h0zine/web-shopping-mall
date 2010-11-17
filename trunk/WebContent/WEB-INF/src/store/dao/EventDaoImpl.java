@@ -108,7 +108,8 @@ public class EventDaoImpl extends JdbcDaoSupport implements EventDao
 		}
 	}
 	
-	public List findAllEvent() {
+	@SuppressWarnings("unchecked")
+	public List<Event> findAllEvent() {
 		return getJdbcTemplate().query(EventDaoImpl.SELECT_ALL, new EventRowMapper());
 	}
 

@@ -85,7 +85,7 @@ body {margin:0; padding:0; background:#BBBBBB;}
 	</c:forEach>
 	</td>
 	<td align="right">
-		<a href="cart.oz">Shopping Cart</a> | <a href="#">Invoice Status</a>
+		<a href="cart.oz">Shopping Cart</a> | <a href="invoice.oz">Invoice Status</a>
 	</td>
 </tr></table>
 </div>
