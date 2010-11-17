@@ -1,0 +1,26 @@
+@CHARSET "EUC-KR";
+
+a:link {font-size:9pt; text-decoration:none; color:darkblue}
+a:visited {font-size:9pt; text-decoration:none; color:darkblue}
+a:hover {font-size:9pt; text-decoration:underline; color:black}
+
+a.sky, 
+a.sky:visited {
+	text-decoration:none;
+	outline:none;
+	border-bottom:1px dotted #97cae6;
+	color:#97cae6;
+}
+
+a.sky:hover{
+	border-bottom:1px dashed transparent;
+}
+
+table.solid-border-1  { border-width:1px; border-color:#666666; border-style:solid; }
+tr.header-1 {FONT-SIZE: 13px; COLOR: #666666; FONT-FAMILY:µ¸¿ò; background: #DDDDDD; }
+td.header-1 {FONT-SIZE: 13px; COLOR: #666666; FONT-FAMILY:µ¸¿ò; background: #DDDDDD; }
+tr.content-1 {FONT-SIZE: 13px; COLOR: #000000; FONT-FAMILY:µ¸¿ò; background: #FFFFFF; }
+td.content-1 {FONT-SIZE: 13px; COLOR: #000000; FONT-FAMILY:µ¸¿ò; background: #FFFFFF; }
+td.bottom-line-1 {border-bottom-width:1px; border-bottom-color:#FF6600; border-bottom-style:dotted;}
+td.top-line-1 {border-top-width:1px; border-top-color:#666666; border-top-style:dotted;}
+td.top-line-2 {border-top-width:1px; border-top-color:#666666; border-top-style:solid;}
