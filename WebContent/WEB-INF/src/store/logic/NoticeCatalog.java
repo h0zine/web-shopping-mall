@@ -8,5 +8,5 @@ public interface NoticeCatalog {
 	void delete(int noticeId);
 	void update(Notice notice);
 	Notice get(int noticeId);
-	List getAll();
+	List<Notice> getAll();
 }

@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import store.logic.Order;
 
+@SuppressWarnings("rawtypes")
 public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao 
 {
 	private static final String SELECT_ALL = "SELECT * FROM orders ORDER BY order_id ASC";

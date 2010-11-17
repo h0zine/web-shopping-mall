@@ -40,6 +40,7 @@ public class AdminEditCategoryController extends SimpleFormController
 	    }
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected ModelAndView onSubmit(HttpServletRequest req, HttpServletResponse res, Object cmd, BindException exception) throws Exception
 	{
 		Category category = (Category) cmd;

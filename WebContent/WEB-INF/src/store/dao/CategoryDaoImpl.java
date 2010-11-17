@@ -157,10 +157,12 @@ public class CategoryDaoImpl extends JdbcDaoSupport implements CategoryDao
 	/**
 	 * This retrieve top level category
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List findAllCategory() {
 		return getJdbcTemplate().query(CategoryDaoImpl.SELECT_ALL, new CategoryRowMapper());
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List findAllCategory(int parent)
 	{
 		return getJdbcTemplate().query(new PreparedStatementSetterForSelectAllCategory(parent), new CategoryRowMapper());
@@ -195,6 +197,7 @@ public class CategoryDaoImpl extends JdbcDaoSupport implements CategoryDao
 	}
 
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List findAllDescendant(int parentId) {
 		Category ca = get(parentId);
 		List descendants = getJdbcTemplate().query(SELECT_DESCENDANT, new Object[] { ca.getThread() } , new CategoryRowMapper());
@@ -233,6 +236,7 @@ public class CategoryDaoImpl extends JdbcDaoSupport implements CategoryDao
 		return list; 
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List getPath(int category) {
 		return getJdbcTemplate().query(SELECT_PATH, new Object[] { new Integer(category)}, new CategoryRowMapper());
 	}

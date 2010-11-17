@@ -18,9 +18,12 @@
         
         <prop key="/cart.oz">cartController</prop>
         <prop key="/cart/add.oz">cartAddController</prop>
-        <prop key="/cart/del.oz">cartDeleteController</prop>
-        <prop key="/cart/clear.oz">cartClearController</prop>
+        <prop key="/cart/update.oz">cartUpdateController</prop>
         <prop key="/cart/checkout.oz">cartCheckoutController</prop>
+        <prop key="/cart/checkoutSucc.oz">cartCheckoutSuccController</prop>
+        
+        <prop key="/invoice.oz">invoiceViewController</prop>
+        
         
         <prop key="/member/join.oz">userEntryFormController</prop>
 
@@ -99,19 +102,25 @@
   	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
 
-  <bean id="cartDeleteController" class="store.web.controller.cart.CartDeleteController">
-  	<property name="shopService"><ref bean="shopSerivce"/></property>
-  </bean>
-
-  <bean id="cartClearController" class="store.web.controller.cart.CartClearController">
+  <bean id="cartUpdateController" class="store.web.controller.cart.CartUpdateController">
   	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
 
   <bean id="cartCheckoutController" class="store.web.controller.cart.CartCheckoutController">
+  	<property name="sessionForm"><value>false</value></property>
+  	<property name="commandName"><value>invoice</value></property>
+  	<property name="commandClass"><value>store.logic.Invoice</value></property>
+  	<property name="formView"><value>checkout</value></property>
+  	<property name="successView"><value>checkoutSucc</value></property>
   	<property name="shopService"><ref bean="shopSerivce"/></property>
   </bean>
 
+  <bean id="cartCheckoutSuccController" class="store.web.controller.cart.CartCheckoutSuccController">
+  </bean>
 
+  <bean id="invoiceViewController" class="store.web.controller.invoice.InvoiceViewController">
+  	<property name="shopService"><ref bean="shopSerivce"/></property>
+  </bean>
 
   <bean id="userEntryFormController" class="store.web.controller.UserEntryFormController">
   	<property name="sessionForm"><value>false</value></property>

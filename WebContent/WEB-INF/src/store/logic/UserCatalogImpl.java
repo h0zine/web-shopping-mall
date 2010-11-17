@@ -4,6 +4,7 @@ import java.util.List;
 
 import store.dao.UserDao;
 
+@SuppressWarnings("rawtypes")
 public class UserCatalogImpl implements UserCatalog {
 	private UserDao userDao;
 	

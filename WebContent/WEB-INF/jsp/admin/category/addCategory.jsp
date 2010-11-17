@@ -1,40 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ include file="/WEB-INF/jsp/jsp_header.jsp" %>    
+<%@ include file="/WEB-INF/jsp/jsp_header.jsp" %>
+<% int parentid = 0; try { parentid = Integer.parseInt(request.getParameter("parent")); } catch (Exception e) {} %>
 <html>
 <head>
-<title><spring:message code="store.name"/> - 카테고리 등록</title>
+<title><spring:message code="store.name"/> - Category Manager</title>
 </head>
-<body>
-<form  name="frm" action="addCategory.oz" method="post">
-<spring:bind path="category">
-  <font color="red"><c:out value="${status.errorMessage}"/></font>
-</spring:bind>
+<link rel=stylesheet type="text/css" href="<spring:message code="store.path"/>/css/admin-general.css" >
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/page.css" />
+<link rel="stylesheet" type="text/css" href="<spring:message code="store.path"/>/css/buttons.css" />
+<body><center><table width="800" height="1000"><tr><td valign="top">
+<%@ include file="/WEB-INF/jsp/admin/menu.jsp" %>
+<div style="position:relative;top:100;left:30; width:600px">
+<table border="0" width="600"><tr><td>
+	<form  name="frm" action="addCategory.oz" method="post">
+		<spring:bind path="category">
+		  <font color="red"><c:out value="${status.errorMessage}"/> </font>
+		</spring:bind>
+		<spring:bind path="category.name">
+			<font color="red"><c:out value="${status.errorMessage}"/><br><br></font>
+		</spring:bind>
+		<input type="hidden" name ="parent" value="<%= parentid %>">
+		<font color="red"><c:out value="${loginErrorMsg }"/></font>
+		<table class="solid-border-1" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td class="header-1" width="100">Category</td>
+				<td class="content-1" width="200">
+					<input type="text" name="name" maxlength="20" style="width:230px">
+				</td>
+			</tr>
+		</table> 
+		
+		<input type="submit" value="Add" style="position:relative;top:10;left:280">
 
-<spring:bind path="category.parent">
-	<input type="hidden"
-		name ="<c:out value="${status.expression}"/>"
-		value="<c:out value="${param.parent}"/>">
-</spring:bind>
-
-<font color="red"><c:out value="${loginErrorMsg }"/></font>
-<table>
-	<tr>
-		<td>카테고리명</td>
-		<td>
-			<spring:bind path="category.name">
-			<input type="text"
-				name="<c:out value="${status.expression}"/>"
-				value="<c:out value="${status.value}"/>" maxlength="20">
-				<font color="red"><c:out value="${status.errorMessage}"/></font>
-			</spring:bind>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<input type="submit" value="추가">
-		</td>
-	</tr>
-</table>
-</form>
+		
+	</form>
+</td></tr></table>
+</div></td></tr></table></center>
 </body>
 </html>

@@ -12,15 +12,15 @@ public class ItemCatalogImpl implements ItemCatalog
 		this.itemDao = itemDao;
 	}
 	
-	public List getItemList() {
+	public List<Item> getItemList() {
 		return this.itemDao.findAll();
 	}
 	
-	public List getEventItemList(int index) {
+	public List<Item> getEventItemList(int index) {
 		return this.itemDao.findEvent(index);
 	}
 	
-	public List getPage(int page) {
+	public List<Item> getPage(int page) {
 		return this.itemDao.getPage(page);
 	}
 	
@@ -40,7 +40,7 @@ public class ItemCatalogImpl implements ItemCatalog
 	public Item getItem(int id) {
 		return this.itemDao.get(id);
 	}
-	public List getItemByCategory(int category) {
+	public List<Item> getItemByCategory(int category) {
 		return this.itemDao.getByCategory(category);
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Invoice {
 	private int id;
+	@SuppressWarnings("rawtypes")
 	private List orders;
 	private Date issueDate;
 	private Date lastUpdate;
@@ -32,6 +33,7 @@ public class Invoice {
 	private String status;   // waiting pay, payed, preparing, waiting pickup, sent, returned, withdrawn
 	private String memo;
 	
+	@SuppressWarnings("rawtypes")
 	public Invoice() {
 		orders = new ArrayList();
 		issueDate = new Date();
@@ -50,14 +52,17 @@ public class Invoice {
 		orders.remove(1);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void addOrder(Order order) {
 		orders.add(order);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public void setOrder(List orders) {
 		this.orders = orders;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public List getOrder() {
 		return this.orders;
 	}

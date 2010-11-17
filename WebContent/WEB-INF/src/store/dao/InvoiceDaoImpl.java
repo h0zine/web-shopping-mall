@@ -138,7 +138,8 @@ public class InvoiceDaoImpl extends JdbcDaoSupport implements InvoiceDao {
 		
 	}
 	
-	public List getPage(int pagenum) {
+	@SuppressWarnings("unchecked")
+	public List<Invoice> getPage(int pagenum) {
 		if (pagenum <= 0) 
 			pagenum = 1;
 		
@@ -152,5 +153,36 @@ public class InvoiceDaoImpl extends JdbcDaoSupport implements InvoiceDao {
 	
 	public void updateInvoice(Invoice invoice) {
 		getJdbcTemplate().update(UPDATE_INVOICE, new PstmtSetterUpdateInvoice(invoice));
+	}
+	
+	class RsGetEmptyInvoice implements ResultSetExtractor 
+	{
+		@Override
+		public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
+			
+			if (rs.next()) {
+				Invoice invoice = new Invoice();
+				invoice.setId(rs.getInt("id"));
+				invoice.setIssueDate(new java.util.Date());
+				invoice.setLastUpdate(new java.util.Date());
+			
+				return invoice;
+			} 
+			else {
+				throw new SQLException("LAST_INSERT_ID() doesn't work.");
+			}
+		}
+	} 
+	
+	public Invoice createInvoice() {
+		java.sql.Date now = new java.sql.Date(new java.util.Date().getTime());
+		getJdbcTemplate().update("INSERT INTO invoice (issue_date, last_update) VALUES(?,?)", new Object[] {now, now});
+		return (Invoice) getJdbcTemplate().query("SELECT MAX(invoice_id) as id FROM invoice", new RsGetEmptyInvoice());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Invoice> findAll(String email, String id)  {
+		return getJdbcTemplate().query("SELECT * FROM invoice WHERE buyer_email = ? AND buyer_id = ? LIMIT 1,100",
+				new Object[] {email, id}, new RMInvoice());
 	}
 }

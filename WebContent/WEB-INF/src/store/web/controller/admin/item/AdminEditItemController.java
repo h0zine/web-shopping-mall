@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
@@ -24,6 +23,7 @@ public class AdminEditItemController extends SimpleFormController
 		this.shopService = shopService;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected Map referenceData(HttpServletRequest request) throws Exception 
 	{
 		//System.out.println("referenceData()");
@@ -35,17 +35,20 @@ public class AdminEditItemController extends SimpleFormController
 
 	protected Object formBackingObject(HttpServletRequest request) throws Exception
 	{
-	    if(!isFormSubmission(request)) {
-	    	
+	    if(!isFormSubmission(request)) 
+	    {
 	        Item item = null;
 	        
-	        try {
+	        try 
+	        {
 	        	item = shopService.getItem(Integer.parseInt(request.getParameter("id")));
-	        } catch (Exception e) {}
+	        } 
+	        catch (Exception e) {}
 	        
 	        return item;
 	    }
-	    else {
+	    else 
+	    {
 	        return super.formBackingObject(request);
 	    }
 	}
@@ -55,13 +58,27 @@ public class AdminEditItemController extends SimpleFormController
 		Item item = (Item) cmd;
 
 		try {
-			this.shopService.updateItem(item);
-			System.out.println(">>>>>>>>>>>>>>>>>>>> move to success view");
+			Item origItem = this.shopService.getItem(item.getItemId().intValue());
+			
+			origItem.setItemName(item.getItemName());
+			origItem.setPrice(item.getPrice());
+			origItem.setPictureUrl(item.getPictureUrl());
+			origItem.setAmount(item.getAmount());
+			origItem.setCategoryId1(item.getCategoryId1());
+			origItem.setCategoryId2(item.getCategoryId2());
+			origItem.setCategoryId3(item.getCategoryId3());
+			origItem.setEventId1(item.getEventId1());
+			origItem.setEventId2(item.getEventId2());
+			origItem.setEventId3(item.getEventId3());
+			origItem.setDescription(item.getDescription());
+			
+			this.shopService.updateItem(origItem);
 			ModelAndView modelAndView = new ModelAndView(getSuccessView());
 			return modelAndView;
 		}
-		catch (DataIntegrityViolationException e) 
+		catch (Exception e) 
 		{
+			e.printStackTrace(System.err);
 			exception.reject("error.duplicate");
 			return showForm(req, res, exception);
 		}

@@ -58,7 +58,8 @@ public class NoticeDaoImpl extends JdbcDaoSupport implements NoticeDao {
 															new Integer(notice.getNoticeId())});
 	}
 
-	public List getAll() {
+	@SuppressWarnings("unchecked")
+	public List<Notice> getAll() {
 		return this.getJdbcTemplate().query(SELECT_ALL, new RmInvoice());
 	}
 

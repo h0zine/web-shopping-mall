@@ -8,6 +8,7 @@ import store.logic.Category;
 
 public class CategoryEntryValidator implements Validator {
 
+	@SuppressWarnings("rawtypes")
 	public boolean supports(Class clazz) {
 		return Category.class.isAssignableFrom(clazz);
 	}

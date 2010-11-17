@@ -19,13 +19,13 @@ public class ItemController implements Controller {
 		this.shopService = shopService;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		int itemId;
 		int categoryId;
 		try {
 			itemId = Integer.parseInt(req.getParameter("id"));
-			categoryId = Integer.parseInt(req.getParameter("cid"));
 		}
 		catch (Exception e) {
 			e.printStackTrace(System.err);
@@ -33,7 +33,12 @@ public class ItemController implements Controller {
 			modelAndView.setViewName("redirect.index");
 			return modelAndView;
 		}
-		
+		try {
+			categoryId = Integer.parseInt(req.getParameter("cid"));
+		} catch (Exception e) {
+			categoryId = 0;
+		}
+
 		Map model = new HashMap();
 		
 		model.put("item", this.shopService.getItem(itemId));

@@ -2,7 +2,6 @@ package store.web.controller.admin.invoice;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Map;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,11 +32,6 @@ public class AdminInvoiceDetailController extends SimpleFormController
 		binder.registerCustomEditor(Date.class, "lastUpdate", new CustomDateEditor(dateFormat,false));
 	}
 	
-	protected Map referenceData(HttpServletRequest request) throws Exception 
-	{
-		return null;
-	}
-	
 	protected Object formBackingObject(HttpServletRequest req) throws Exception
 	{
 	    if(!isFormSubmission(req)) {
@@ -63,7 +57,21 @@ public class AdminInvoiceDetailController extends SimpleFormController
 	{
 		Invoice invoice = (Invoice) cmd;
 		try {
-			shopService.updateInvoice(invoice);
+			Invoice prevInvoice = shopService.getInvoice(invoice.getId());
+			if (prevInvoice != null) {
+				prevInvoice.setStatus(invoice.getStatus());
+				prevInvoice.setBuyerName(invoice.getBuyerName());
+				prevInvoice.setBuyerPhone(invoice.getBuyerPhone());
+				prevInvoice.setReceiverName(invoice.getReceiverName());
+				prevInvoice.setReceiverEmail(invoice.getReceiverEmail());
+				prevInvoice.setReceiverPhone(invoice.getReceiverPhone());
+				prevInvoice.setAddress1(invoice.getAddress1());
+				prevInvoice.setAddress2(invoice.getAddress2());
+				prevInvoice.setPostcode(invoice.getPostcode());
+				prevInvoice.setState(invoice.getState());
+				
+				shopService.updateInvoice(prevInvoice);
+			}
 			ModelAndView modelAndView = new ModelAndView(getSuccessView());
 			return modelAndView;
 		}

@@ -54,7 +54,8 @@ public class FeedbackDaoImpl extends JdbcDaoSupport implements FeedbackDao {
 		
 	}
 	
-	public List getPage(int page) {
+	@SuppressWarnings("unchecked")
+	public List<Feedback> getPage(int page) {
 		if (page <= 0) page = 1;
 		int start = (page - 1) * PAGE_SIZE;
 		int end = page * PAGE_SIZE;
@@ -70,7 +71,8 @@ public class FeedbackDaoImpl extends JdbcDaoSupport implements FeedbackDao {
 		this.getJdbcTemplate().update(DELETE, new Object[] {new Integer(feedbackId)});
 	}
 	
-	public List getItemFeedback(int itemId) {
+	@SuppressWarnings("unchecked")
+	public List<Feedback> getItemFeedback(int itemId) {
 		return this.getJdbcTemplate().query(SELECT_ITEM, new Object[] {new Integer(itemId)}, new RMFeedBack());
 	}
 

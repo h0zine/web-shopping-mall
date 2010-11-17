@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import store.logic.Shop;
 import store.logic.Notice;
-import store.web.WebConstants;
+
 
 public class AdminAddNoticeController extends SimpleFormController 
 {

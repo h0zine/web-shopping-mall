@@ -3,6 +3,7 @@ package store.dao;
 import java.util.List;
 import store.logic.Order;
 
+@SuppressWarnings("rawtypes")
 public interface OrderDao 
 {
 	List  selectAll();

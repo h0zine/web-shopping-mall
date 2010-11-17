@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.Controller;
 
 public class AdminIndexController implements Controller 
 {
+	@SuppressWarnings("rawtypes")
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		Map model = new HashMap();

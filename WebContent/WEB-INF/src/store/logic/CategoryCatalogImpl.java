@@ -12,12 +12,12 @@ public class CategoryCatalogImpl implements CategoryCatalog
 		this.categoryDao = categoryDao;
 	}
 	
-	public List getList(int parent)
+	public List<Category> getList(int parent)
 	{
 		return this.categoryDao.findAllCategory(parent);
 	}
 	
-	public List getAllList()
+	public List<Category> getAllList()
 	{
 		return this.categoryDao.findAllCategory();
 	}
@@ -42,11 +42,11 @@ public class CategoryCatalogImpl implements CategoryCatalog
 		this.categoryDao.update(category);
 	}
 	
-	public List findAllDescendant(int parent) {
+	public List<Category> findAllDescendant(int parent) {
 		return this.categoryDao.findAllDescendant(parent);
 	}
 	
-	public List getPath(int category) {
+	public List<Category> getPath(int category) {
 		return this.categoryDao.getPath(category);
 	}
 }

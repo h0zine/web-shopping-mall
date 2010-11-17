@@ -24,6 +24,7 @@ public class AdminInvoiceListController extends SimpleFormController
 		this.shopService = shop;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		int pagenum;
